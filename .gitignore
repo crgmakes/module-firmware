@@ -45,3 +45,6 @@ Doxyfile*
 doxygen_sqlite3.db
 html
 *.tmp
+
+#seesaw
+lib/Adafruit*
