@@ -13,7 +13,7 @@ void setup() {
 #endif
 
   setChannelCount(1);
-
+ 
   Adafruit_seesawPeripheral_begin();
 }
 
