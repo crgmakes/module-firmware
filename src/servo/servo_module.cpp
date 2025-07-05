@@ -1,23 +1,24 @@
 /**
- * @brief Main program file for an Aquarius Relay Module
- * @file relay_module.h
- * @date June 8, 2025
+ * @brief Main program file for an Aquarius Servo Module
+ * @file servo_module.h
+ * @date July 5, 2025
  * @author cyberreefguru
  */
+
 #include "ModuleHardware.h"
 
-#ifdef AQ_RELAY
+#ifdef AQ_SERVO
 
 // All modules needs these
 #define ADDR_PIN_0 PIN_PB4
 #define ADDR_PIN_1 PIN_PB5
-#define PRODUCT_CODE MODULE_RELAY_PRODUCT_CODE
-#define CONFIG_I2C_PERIPH_ADDR MODULE_RELAY_ADDRESS
-#define CONFIG_CHANNELS 1
+#define PRODUCT_CODE MODULE_SERVO_PRODUCT_CODE
+#define CONFIG_I2C_PERIPH_ADDR MODULE_SERVO_ADDRESS
+#define CONFIG_CHANNELS 4
 
 // This specific module
-// #define CONFIG_NEOPIXEL 1
-// #define CONFIG_NEOPIXEL_BUF_MAX 4
+#define CONFIG_NEOPIXEL 1
+#define CONFIG_NEOPIXEL_BUF_MAX 4
 
 // #define CONFIG_INTERRUPT_PIN 8
 // #define CONFIG_INTERRUPT 1
@@ -32,8 +33,7 @@ void setup()
   delay(500);
 #endif
 
-  setChannelCount(1);
-
+  setChannelCount(CONFIG_CHANNELS);
   Adafruit_seesawPeripheral_begin();
 }
 
