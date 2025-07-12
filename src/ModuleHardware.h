@@ -11,7 +11,8 @@
 // Each module can have up to 4 different addresses
 // set in hardware; A0 and A1 on the board define 
 // how much is added to the base address 0, 1, 3, 4
-#define MODULE_ADDRESS_SERVO 0x30 // 0, 1, 2, 3
+#define MODULE_BASE_ADDRESS 0x30 // 0, 1, 2, 3
+#define MODULE_ADDRESS_SERVO MODULE_BASE_ADDRESS // 0, 1, 2, 3
 #define MODULE_ADDRESS_MOTOR (MODULE_ADDRESS_SERVO+0x04) // 4, 5, 6, 7
 #define MODULE_ADDRESS_SWITCH (MODULE_ADDRESS_MOTOR+0x04) // 8, 9, A, B
 #define MODULE_ADDRESS_RELAY (MODULE_ADDRESS_SWITCH+0x04) // C, D, E, F
