@@ -8,6 +8,8 @@
 
 #define AQUARIUS 1
 
+// NOTE: The Seesaw "product code" for aquarius is (0xAA00) | (MODULE_ADDRESS)
+
 // Each module can have up to 4 different addresses
 // set in hardware; A0 and A1 on the board define 
 // how much is added to the base address 0, 1, 3, 4
