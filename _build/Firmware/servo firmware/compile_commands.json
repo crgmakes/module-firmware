@@ -1,0 +1,44 @@
+[
+{
+  "directory": "/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo firmware",
+  "command": "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin/avr-g++ -DDEBUG -D__ATtiny1616__ -Dservo_firmware=servo_firmware -I/Users/tsasala/.mchp_packs/Microchip/ATtiny_DFP/3.3.272/include -x c++ -g -gdwarf-2 -mmcu=attiny1616 -B/Users/tsasala/.mchp_packs/Microchip/ATtiny_DFP/3.3.272/gcc/dev/attiny1616 -x c++ -c -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -o CMakeFiles/Firmware_servo_firmware_default_AVR_GCC_compile_cpp.dir/Users/tsasala/Development/Aquarius_New/module-firmware/.pio/libdeps/servo1_1/Adafruit_BusIO/Adafruit_BusIO_Register.cpp.obj -c \"/Users/tsasala/Development/Aquarius New/module-firmware/.pio/libdeps/servo1_1/Adafruit BusIO/Adafruit_BusIO_Register.cpp\"",
+  "file": "/Users/tsasala/Development/Aquarius New/module-firmware/.pio/libdeps/servo1_1/Adafruit BusIO/Adafruit_BusIO_Register.cpp",
+  "output": "/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo firmware/CMakeFiles/Firmware_servo_firmware_default_AVR_GCC_compile_cpp.dir/Users/tsasala/Development/Aquarius_New/module-firmware/.pio/libdeps/servo1_1/Adafruit_BusIO/Adafruit_BusIO_Register.cpp.obj"
+},
+{
+  "directory": "/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo firmware",
+  "command": "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin/avr-g++ -DDEBUG -D__ATtiny1616__ -Dservo_firmware=servo_firmware -I/Users/tsasala/.mchp_packs/Microchip/ATtiny_DFP/3.3.272/include -x c++ -g -gdwarf-2 -mmcu=attiny1616 -B/Users/tsasala/.mchp_packs/Microchip/ATtiny_DFP/3.3.272/gcc/dev/attiny1616 -x c++ -c -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -o CMakeFiles/Firmware_servo_firmware_default_AVR_GCC_compile_cpp.dir/Users/tsasala/Development/Aquarius_New/module-firmware/.pio/libdeps/servo1_1/Adafruit_BusIO/Adafruit_GenericDevice.cpp.obj -c \"/Users/tsasala/Development/Aquarius New/module-firmware/.pio/libdeps/servo1_1/Adafruit BusIO/Adafruit_GenericDevice.cpp\"",
+  "file": "/Users/tsasala/Development/Aquarius New/module-firmware/.pio/libdeps/servo1_1/Adafruit BusIO/Adafruit_GenericDevice.cpp",
+  "output": "/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo firmware/CMakeFiles/Firmware_servo_firmware_default_AVR_GCC_compile_cpp.dir/Users/tsasala/Development/Aquarius_New/module-firmware/.pio/libdeps/servo1_1/Adafruit_BusIO/Adafruit_GenericDevice.cpp.obj"
+},
+{
+  "directory": "/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo firmware",
+  "command": "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin/avr-g++ -DDEBUG -D__ATtiny1616__ -Dservo_firmware=servo_firmware -I/Users/tsasala/.mchp_packs/Microchip/ATtiny_DFP/3.3.272/include -x c++ -g -gdwarf-2 -mmcu=attiny1616 -B/Users/tsasala/.mchp_packs/Microchip/ATtiny_DFP/3.3.272/gcc/dev/attiny1616 -x c++ -c -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -o CMakeFiles/Firmware_servo_firmware_default_AVR_GCC_compile_cpp.dir/Users/tsasala/Development/Aquarius_New/module-firmware/.pio/libdeps/servo1_1/Adafruit_BusIO/Adafruit_I2CDevice.cpp.obj -c \"/Users/tsasala/Development/Aquarius New/module-firmware/.pio/libdeps/servo1_1/Adafruit BusIO/Adafruit_I2CDevice.cpp\"",
+  "file": "/Users/tsasala/Development/Aquarius New/module-firmware/.pio/libdeps/servo1_1/Adafruit BusIO/Adafruit_I2CDevice.cpp",
+  "output": "/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo firmware/CMakeFiles/Firmware_servo_firmware_default_AVR_GCC_compile_cpp.dir/Users/tsasala/Development/Aquarius_New/module-firmware/.pio/libdeps/servo1_1/Adafruit_BusIO/Adafruit_I2CDevice.cpp.obj"
+},
+{
+  "directory": "/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo firmware",
+  "command": "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin/avr-g++ -DDEBUG -D__ATtiny1616__ -Dservo_firmware=servo_firmware -I/Users/tsasala/.mchp_packs/Microchip/ATtiny_DFP/3.3.272/include -x c++ -g -gdwarf-2 -mmcu=attiny1616 -B/Users/tsasala/.mchp_packs/Microchip/ATtiny_DFP/3.3.272/gcc/dev/attiny1616 -x c++ -c -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -o CMakeFiles/Firmware_servo_firmware_default_AVR_GCC_compile_cpp.dir/Users/tsasala/Development/Aquarius_New/module-firmware/.pio/libdeps/servo1_1/Adafruit_BusIO/Adafruit_SPIDevice.cpp.obj -c \"/Users/tsasala/Development/Aquarius New/module-firmware/.pio/libdeps/servo1_1/Adafruit BusIO/Adafruit_SPIDevice.cpp\"",
+  "file": "/Users/tsasala/Development/Aquarius New/module-firmware/.pio/libdeps/servo1_1/Adafruit BusIO/Adafruit_SPIDevice.cpp",
+  "output": "/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo firmware/CMakeFiles/Firmware_servo_firmware_default_AVR_GCC_compile_cpp.dir/Users/tsasala/Development/Aquarius_New/module-firmware/.pio/libdeps/servo1_1/Adafruit_BusIO/Adafruit_SPIDevice.cpp.obj"
+},
+{
+  "directory": "/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo firmware",
+  "command": "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin/avr-g++ -DDEBUG -D__ATtiny1616__ -Dservo_firmware=servo_firmware -I/Users/tsasala/.mchp_packs/Microchip/ATtiny_DFP/3.3.272/include -x c++ -g -gdwarf-2 -mmcu=attiny1616 -B/Users/tsasala/.mchp_packs/Microchip/ATtiny_DFP/3.3.272/gcc/dev/attiny1616 -x c++ -c -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -o CMakeFiles/Firmware_servo_firmware_default_AVR_GCC_compile_cpp.dir/Users/tsasala/Development/Aquarius_New/module-firmware/src/core/AbstractModule.cpp.obj -c \"/Users/tsasala/Development/Aquarius New/module-firmware/src/core/AbstractModule.cpp\"",
+  "file": "/Users/tsasala/Development/Aquarius New/module-firmware/src/core/AbstractModule.cpp",
+  "output": "/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo firmware/CMakeFiles/Firmware_servo_firmware_default_AVR_GCC_compile_cpp.dir/Users/tsasala/Development/Aquarius_New/module-firmware/src/core/AbstractModule.cpp.obj"
+},
+{
+  "directory": "/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo firmware",
+  "command": "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin/avr-g++ -DDEBUG -D__ATtiny1616__ -Dservo_firmware=servo_firmware -I/Users/tsasala/.mchp_packs/Microchip/ATtiny_DFP/3.3.272/include -x c++ -g -gdwarf-2 -mmcu=attiny1616 -B/Users/tsasala/.mchp_packs/Microchip/ATtiny_DFP/3.3.272/gcc/dev/attiny1616 -x c++ -c -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -o CMakeFiles/Firmware_servo_firmware_default_AVR_GCC_compile_cpp.dir/Users/tsasala/Development/Aquarius_New/module-firmware/src/servo/ServoModule.cpp.obj -c \"/Users/tsasala/Development/Aquarius New/module-firmware/src/servo/ServoModule.cpp\"",
+  "file": "/Users/tsasala/Development/Aquarius New/module-firmware/src/servo/ServoModule.cpp",
+  "output": "/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo firmware/CMakeFiles/Firmware_servo_firmware_default_AVR_GCC_compile_cpp.dir/Users/tsasala/Development/Aquarius_New/module-firmware/src/servo/ServoModule.cpp.obj"
+},
+{
+  "directory": "/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo firmware",
+  "command": "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin/avr-g++ -DDEBUG -D__ATtiny1616__ -Dservo_firmware=servo_firmware -I/Users/tsasala/.mchp_packs/Microchip/ATtiny_DFP/3.3.272/include -x c++ -g -gdwarf-2 -mmcu=attiny1616 -B/Users/tsasala/.mchp_packs/Microchip/ATtiny_DFP/3.3.272/gcc/dev/attiny1616 -x c++ -c -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -o CMakeFiles/Firmware_servo_firmware_default_AVR_GCC_compile_cpp.dir/Users/tsasala/Development/Aquarius_New/module-firmware/src/servo/servo_module.cpp.obj -c \"/Users/tsasala/Development/Aquarius New/module-firmware/src/servo/servo_module.cpp\"",
+  "file": "/Users/tsasala/Development/Aquarius New/module-firmware/src/servo/servo_module.cpp",
+  "output": "/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo firmware/CMakeFiles/Firmware_servo_firmware_default_AVR_GCC_compile_cpp.dir/Users/tsasala/Development/Aquarius_New/module-firmware/src/servo/servo_module.cpp.obj"
+}
+]

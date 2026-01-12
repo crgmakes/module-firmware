@@ -114,7 +114,12 @@ void AbstractModule::setDateCode()
 
     memset((void *)buf, 0, 12);
 
+    // __DATE__ format: 'Mmm dd yyyy'
     strncpy(buf, __DATE__, 11);
+
+    buf[3] = 0; // null terminator after month
+    buf[6] = 0; // null terminator after day
+    buf[11] = 0; // null terminator after year
 
     month = (strstr(month_names, buf) - month_names) / 3 + 1;
     day = atoi(buf + 4);
@@ -122,9 +127,9 @@ void AbstractModule::setDateCode()
 
     gDateCode = day & 0x1F; // top 5 bits are day of month
     gDateCode <<= 4;
-    gDateCode |= month & 0xF; // middle 4 bits are month
+    gDateCode |= month & 0x0F; // middle 4 bits are month
     gDateCode <<= 7;
-    gDateCode |= (year - 2000) & 0x3F; // bottom 7 bits are year
+    gDateCode |= (year - 2000) & 0x7F; // bottom 7 bits are year
 
     gVersion = ((uint32_t)MODULE_PRODUCT_CODE) << 16;
     gVersion |= (((uint32_t)gDateCode) & 0x0000ffff);

@@ -1,0 +1,14 @@
+# ninja log v7
+2	328	1768151275683346400	CMakeFiles/Firmware_servo_default_AVR_GCC_assembleWithPreprocess.dir/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/wiring_pulse.S.o	feeb9dd7f1408893
+5	389	1768151275686671788	CMakeFiles/Firmware_servo_default_AVR_GCC_compile_cpp.dir/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/ExtraWiring.cpp.obj	27f1f18ff9d84244
+3	334	1768151275684667197	CMakeFiles/Firmware_servo_default_AVR_GCC_compile.dir/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/hooks.c.o	8326b63807d408d5
+7	409	1768151275688596087	CMakeFiles/Firmware_servo_default_AVR_GCC_compile_cpp.dir/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/abi.cpp.obj	73f9581cc27ea9f3
+7	393	1768151275689013880	CMakeFiles/Firmware_servo_default_AVR_GCC_compile_cpp.dir/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/api/Common.cpp.obj	5f9a96d335c799eb
+6	422	1768151275687807042	CMakeFiles/Firmware_servo_default_AVR_GCC_compile_cpp.dir/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/WMath.cpp.obj	323bbbb2bd0317a1
+8	454	1768151275689993425	CMakeFiles/Firmware_servo_default_AVR_GCC_compile_cpp.dir/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/api/PluggableUSB.cpp.obj	ef0498bc99004ce4
+9	454	1768151275690430843	CMakeFiles/Firmware_servo_default_AVR_GCC_compile_cpp.dir/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/api/RingBuffer.cpp.obj	76a0259e2a046d0b
+8	481	1768151275689651382	CMakeFiles/Firmware_servo_default_AVR_GCC_compile_cpp.dir/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/api/IPAddress.cpp.obj	c64e4371a1373ad6
+9	540	1768151275690796178	CMakeFiles/Firmware_servo_default_AVR_GCC_compile_cpp.dir/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/api/Stream.cpp.obj	43d32ac20b48f04f
+8	486	1768151275690231426	CMakeFiles/Firmware_servo_default_AVR_GCC_compile_cpp.dir/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/api/Print.cpp.obj	5c319efe505f53c5
+329	633	1768151276010410880	CMakeFiles/Firmware_servo_default_AVR_GCC_compile_cpp.dir/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/api/String.cpp.obj	47386f909146d7f2
+5	384	1768151238117301812	CMakeFiles/Firmware_servo_default_AVR_GCC_compile_cpp.dir/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/new.cpp.obj	faab6345496470f8

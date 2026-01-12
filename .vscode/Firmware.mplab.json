@@ -1,0 +1,79 @@
+{
+    "version": "1.8",
+    "configurations": [
+        {
+            "name": "servo",
+            "id": "",
+            "device": "ATtiny1616",
+            "imageType": "application",
+            "imagePath": ".pio/build/servo1_1/firmware.elf",
+            "toolProperties": "pickit5-tool-base",
+            "tool": "PICkit 5",
+            "packs": [
+                {
+                    "name": "ATtiny_DFP",
+                    "vendor": "Microchip",
+                    "version": "3.3.272"
+                }
+            ],
+            "fileSet": "servo1_1",
+            "toolchain": "default-AVR-GCC",
+            "preBuildSteps": [],
+            "postBuildSteps": []
+        }
+    ],
+    "propertyGroups": [
+        {
+            "name": "servo firmware-uservariables",
+            "type": "uservariables",
+            "properties": {}
+        },
+        {
+            "name": "default-AVR-GCC",
+            "type": "toolchain",
+            "provider": "microchip.toolchains:avr-gcc@7.3.0",
+            "properties": {
+                "global.common-include-directories": [
+                    "\"/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore\"",
+                    "\"/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/variants/txy6\"",
+                    "\"/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/libraries\"",
+                    "\"/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/Comparator\""
+                ]
+            }
+        },
+        {
+            "name": "pickit5-tool-base",
+            "type": "tool",
+            "properties": {
+                "poweroptions.powerenable": true,
+                "voltagevalue": "3.3"
+            }
+        }
+    ],
+    "fileSets": [
+        {
+            "name": "servo1_1",
+            "files": [
+                "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/variants/txy6",
+                "src/core/*",
+                "src/servo/*",
+                ".pio/build/servo1_1/lib04b/*",
+                ".pio/build/servo1_1/lib205/*",
+                ".pio/build/servo1_1/lib713/*",
+                ".pio/build/servo1_1/lib9ae/*",
+                ".pio/libdeps/servo1_1/Adafruit BusIO/*{.cpp,.h}",
+                ".pio/build/servo1_1/*.a",
+                {
+                    "include": ".pio/build/servo1_1/*{.elf,.hex}",
+                    "type": "loadableFile"
+                },
+                "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/*",
+                "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/**/*",
+                "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/*",
+                "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore/**/*",
+                "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/variants/txy6/**/*",
+                "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/variants/txy6/*"
+            ]
+        }
+    ]
+}

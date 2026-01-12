@@ -1,0 +1,4 @@
+/Users/tsasala/Development/Aquarius New/module-firmware/_build/Servo_Sim/default/CMakeFiles/Servo_Sim_default_default_AVR_GCC_compile_cpp.dir
+/Users/tsasala/Development/Aquarius New/module-firmware/_build/Servo_Sim/default/CMakeFiles/Servo_Sim_default_image__RgkSZSs.dir
+/Users/tsasala/Development/Aquarius New/module-firmware/_build/Servo_Sim/default/CMakeFiles/edit_cache.dir
+/Users/tsasala/Development/Aquarius New/module-firmware/_build/Servo_Sim/default/CMakeFiles/rebuild_cache.dir

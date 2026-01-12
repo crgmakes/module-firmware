@@ -1,0 +1,6 @@
+/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo/CMakeFiles/Firmware_servo_default_AVR_GCC_assembleWithPreprocess.dir
+/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo/CMakeFiles/Firmware_servo_default_AVR_GCC_compile.dir
+/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo/CMakeFiles/Firmware_servo_default_AVR_GCC_compile_cpp.dir
+/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo/CMakeFiles/Firmware_servo_image__RgkSZSs.dir
+/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo/CMakeFiles/edit_cache.dir
+/Users/tsasala/Development/Aquarius New/module-firmware/_build/Firmware/servo/CMakeFiles/rebuild_cache.dir

@@ -19,8 +19,13 @@ void ServoModule::initialize()
 {
     // Setup hardware
     servo1.attach(SERVO_1_PIN);
+    servo1.write(0); // this needs to be pulled from EEPROM
+
     servo2.attach(SERVO_3_PIN);
+    servo2.write(0); // this needs to be pulled from EEPROM
+
     servo3.attach(SERVO_3_PIN);
+    servo3.write(0); // this needs to be pulled from EEPROM
 
     // Call super initialize
     AbstractModule::initialize();
@@ -56,6 +61,26 @@ void ServoModule::handleRequestEvent()
 
 void ServoModule::handleServoReceive()
 {
+    uint8_t channel = i2cBuffer[2];
+    uint32_t angle = 0;
+    angle = i2cBuffer[3]; // MSB
+    angle <<= 8;
+    angle |= i2cBuffer[4]; // LSB
+    angle <<= 8;
+    switch (channel)
+    {
+    case 1:
+        servo1.write(angle);
+        break;
+    case 2:
+        servo2.write(angle);
+        break;
+    case 3:
+        servo3.write(angle);
+        break;
+    default:
+        break;
+    }
 }
 
 void ServoModule::handleServoRequest()

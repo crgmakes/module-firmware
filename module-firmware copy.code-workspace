@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "megatinycore",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore"
+		}
+	],
+	"settings": {
+		"mplab.clangd.arguments": [
+			"--compile-commands-dir=${workspaceFolder}/_build/Firmware/servo"
+		],
+		"mplab.clangd.path": "",
+		"C_Cpp.intelliSenseEngine": "disabled",
+		"memory-inspector.debugTypes": [
+			"arm-debugger",
+			"embedded-debug",
+			"gdb",
+			"mplab-core-da"
+		]
+	}
+}
