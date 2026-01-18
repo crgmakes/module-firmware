@@ -14,6 +14,14 @@
 		{
 			"name": "tinyNeoPixel_Static",
 			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/tinyNeoPixel_Static"
+		},
+		{
+			"name": "txy6",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/variants/txy6"
+		},
+		{
+			"name": "Comparator",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/Comparator"
 		}
 	],
 	"settings": {
