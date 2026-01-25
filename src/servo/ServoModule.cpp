@@ -62,21 +62,25 @@ void ServoModule::handleRequestEvent()
 void ServoModule::handleServoReceive()
 {
     uint8_t channel = i2cBuffer[2];
+
     uint32_t angle = 0;
     angle = i2cBuffer[3]; // MSB
     angle <<= 8;
     angle |= i2cBuffer[4]; // LSB
-    angle <<= 8;
+
     switch (channel)
     {
-    case 1:
+    case 0:
         servo1.write(angle);
         break;
-    case 2:
+    case 1:
         servo2.write(angle);
         break;
-    case 3:
+    case 2:
         servo3.write(angle);
+        break;
+    case 3:
+        // servo3.write(angle);
         break;
     default:
         break;
@@ -85,4 +89,25 @@ void ServoModule::handleServoReceive()
 
 void ServoModule::handleServoRequest()
 {
+    uint8_t channel = i2cBuffer[2];
+    uint8_t angle = 0;
+
+    switch (channel)
+    {
+    case 0:
+        angle = servo1.read();
+        break;
+    case 1:
+        angle = servo2.read();
+        break;
+    case 2:
+        angle = servo3.read();
+        break;
+    case 3:
+        // angle = servo4.read();
+        break;
+    default:
+        break;
+    }
+    Wire.write(angle); // instant reply
 }

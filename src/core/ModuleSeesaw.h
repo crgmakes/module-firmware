@@ -177,12 +177,32 @@ enum
   SEESAW_SPECTRUM_STATUS = 0xFF,
 };
 
-/** keypad module function address registers
+
+/**
+ * Servo registers
  */
 enum
 {
-  SEESAW_PARTICLE_1 = 0x00,
-  SEESAW_PARTICLE_25 = 0x01,
-  SEESAW_PARTICLE_4 = 0x02,
-  SEESAW_PARTICLE_10 = 0x03,
+    SEESAW_SERVO_ANGLE = 0x01,
+    SEESAW_SERVO_SPEED = 0x02,
+};
+
+/**
+ * Current registers
+ */
+enum
+{
+    SEESAW_CURRENT_VALUE = 0x01,
+};
+
+
+/**
+ * Particle registers
+ */
+enum
+{
+    SEESAW_PARTICLE_1 = 0x00,
+    SEESAW_PARTICLE_25 = 0x01,
+    SEESAW_PARTICLE_4 = 0x02,
+    SEESAW_PARTICLE_10 = 0x03,
 };

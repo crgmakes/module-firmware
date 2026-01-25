@@ -88,6 +88,7 @@ protected:
   // volatile uint8_t g_pwmStatus;
 
   void setDateCode();
+  void write16(uint16_t value);
   void write32(uint32_t value);
 
   /* I2C callbacks (must be fast + ISR-safe) */

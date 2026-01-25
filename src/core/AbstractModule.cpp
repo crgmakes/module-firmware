@@ -168,6 +168,16 @@ uint32_t AbstractModule::readBulk(uint32_t validpins = VALID_GPIO)
 }
 
 /**
+ * @brief writes 16-bit value to I2C bus
+ * @param value the value to write
+ */
+void AbstractModule::write16(uint16_t value)
+{
+    Wire.write(value >> 8);
+    Wire.write(value);
+}
+
+/**
  * @brief writes 32-bit value to I2C bus
  * @param value the value to write
  */

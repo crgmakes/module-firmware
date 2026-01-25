@@ -22,6 +22,14 @@
 		{
 			"name": "Comparator",
 			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/Comparator"
+		},
+		{
+			"name": "EEPROM",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/EEPROM"
+		},
+		{
+			"name": "Event",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/Event"
 		}
 	],
 	"settings": {
