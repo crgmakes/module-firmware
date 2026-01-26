@@ -42,6 +42,10 @@
 		{
 			"name": "SD",
 			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/SD"
+		},
+		{
+			"name": "SPI",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/SPI"
 		}
 	],
 	"settings": {

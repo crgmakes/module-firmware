@@ -17,6 +17,9 @@ ServoModule::~ServoModule()
 
 void ServoModule::initialize()
 {
+    // Call super initialize
+    AbstractModule::initialize();
+
     // Setup hardware
     servos[0].attach(SERVO_1_PIN);
     servos[0].write(0); // this needs to be pulled from EEPROM
@@ -27,8 +30,6 @@ void ServoModule::initialize()
     servos[2].attach(SERVO_3_PIN);
     servos[2].write(0); // this needs to be pulled from EEPROM
 
-    // Call super initialize
-    AbstractModule::initialize();
 }
 
 void ServoModule::handleReceiveEvent()
@@ -61,49 +62,68 @@ void ServoModule::handleRequestEvent()
 
 void ServoModule::handleServoReceive()
 {
+    if( receiveLength == 2 )
+    {
+        // This is a read command
+        return;
+    }
+    
+    uint8_t angle = 0;
+    uint32_t us = servos[0].readMicroseconds();
+    if( us == MIN_PULSE_WIDTH )
+    {
+        angle = 0;
+    }
+    else if( us == MAX_PULSE_WIDTH )
+    {
+        angle = 180;
+    }
+    int32_t a = 0;
+    a = servos[0].read();
+    //angle = (uint8_t)(a & 0x0ff);
 
-    uint32_t angle = 0;
-    angle = servos[0].read();
     if( angle == 0 )
     {
         servos[0].write(180);
+        servos[1].write(180);
+        servos[2].write(180);
     }
     else
     {
         servos[0].write(0);
+        servos[1].write(0);
+        servos[2].write(0);
     }
     return;
 
-    uint8_t channel = i2cBuffer[2];
-    if (channel >= MODULE_CHANNELS)
-    {
-        SEESAW_DEBUG(F("Requested channel out of range: "));
-        SEESAW_DEBUGLN(channel);
-        return;
-    }
-
-    angle = i2cBuffer[3]; // MSB
-    angle <<= 8;
-    angle |= i2cBuffer[4]; // LSB
-
-    servos[channel].write(angle);
-    // switch (channel)
+    // uint8_t channel = i2cBuffer[2];
+    // if (channel >= MODULE_CHANNELS)
     // {
-    // case 0:
-    //     servo1.write(angle);
-    //     break;
-    // case 1:
-    //     servo2.write(angle);
-    //     break;
-    // case 2:
-    //     servo3.write(angle);
-    //     break;
-    // case 3:
-    //     // servo3.write(angle);
-    //     break;
-    // default:
-    //     break;
+    //     SEESAW_DEBUG(F("Requested channel out of range: "));
+    //     SEESAW_DEBUGLN(channel);
+    //     return;
     // }
+
+    // angle = i2cBuffer[3];
+    // servos[channel].write(angle);
+
+    // // switch (channel)
+    // // {
+    // // case 0:
+    // //     servo1.write(angle);
+    // //     break;
+    // // case 1:
+    // //     servo2.write(angle);
+    // //     break;
+    // // case 2:
+    // //     servo3.write(angle);
+    // //     break;
+    // // case 3:
+    // //     // servo3.write(angle);
+    // //     break;
+    // // default:
+    // //     break;
+    // // }
 }
 
 void ServoModule::handleServoRequest()
