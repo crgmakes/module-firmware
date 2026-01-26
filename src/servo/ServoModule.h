@@ -24,16 +24,9 @@ private:
     ServoModule &operator=(const ServoModule &) = delete;
 
     Servo servos[MODULE_CHANNELS];
-    uint8_t value[MODULE_CHANNELS];
-
-    // Servo servo1;
-    // Servo servo2;
-    // Servo servo3;
+    uint8_t values[MODULE_CHANNELS];
 
     virtual void handleReceiveEvent() override;
     virtual void handleRequestEvent() override;
-
-    void handleServoReceive();
-    void handleServoRequest();
 
 };

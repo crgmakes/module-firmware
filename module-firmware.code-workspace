@@ -58,6 +58,7 @@
 		"mplab.clangd.arguments": [
 			"--compile-commands-dir=${workspaceFolder}/_build/Firmware/servo"
 		],
-		"mplab.clangd.path": ""
+		"mplab.clangd.path": "",
+		"mplab.project.workspace.addNewSourceFiles": "Never"
 	}
 }

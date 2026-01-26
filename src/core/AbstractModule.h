@@ -79,10 +79,10 @@ protected:
   volatile uint8_t i2cBuffer[32];
   volatile uint8_t receiveLength;
 
-  uint16_t gDateCode; // bits represent: DDDDDMMMMYYYYYYYY
-  uint32_t gVersion;  // PRODUCT_CODE<<16 | DATE_CODE
+  uint16_t dateCode; // bits represent: DDDDDMMMMYYYYYYYY
+  uint32_t version;  // PRODUCT_CODE<<16 | DATE_CODE
 
-  volatile uint32_t g_bufferedBulkGPIORead;
+  volatile uint32_t bufferedBulkGPIORead;
   // volatile uint16_t g_bufferedADCRead;
   // volatile uint8_t g_adcStatus;
   // volatile uint8_t g_pwmStatus;

@@ -1,10 +1,10 @@
 /**
- * @brief Main program file for an Aquarius Relay Module
- * @file relay_module.h
- * @date June 8, 2025
+ * @brief Main program file for an Aquarius GPIO Module
+ * @file gpio_module.h
+ * @date Jan 26, 2026
  * @author cyberreefguru
  */
-#include "RelayModule.h"
+#include "gpio/GpioModule.h"
 
 void setup()
 {
@@ -13,7 +13,7 @@ void setup()
   delay(500);
 #endif
 
-  module = new RelayModule();
+  module = new GpioModule();
 
   module->initialize();
   module->begin();

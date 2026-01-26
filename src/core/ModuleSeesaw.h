@@ -188,6 +188,15 @@ enum
 };
 
 /**
+ * Relay registers
+ */
+enum
+{
+    SEESAW_RELAY_BULK = 0x01,
+    SEESAW_RELAY_CHANNEL = 0x02,
+};
+
+/**
  * Current registers
  */
 enum

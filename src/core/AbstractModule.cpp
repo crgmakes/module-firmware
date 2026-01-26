@@ -4,6 +4,7 @@
  * @date 3 Jan 2026
  * @author cyberreefguru
  * @note software cribbed from Adafruit and optimized for Aquarius
+ * @note this class only handles status and GPIO functions; all others passed to subclass.
  */
 #include "AbstractModule.h"
 
@@ -18,10 +19,10 @@ AbstractModule::AbstractModule()
     memset((void *)i2cBuffer, 0, sizeof(i2cBuffer));
     receiveLength = 0;
 
-    gVersion = 0;
-    gDateCode = 0;
+    version = 0;
+    dateCode = 0;
 
-    g_bufferedBulkGPIORead = 0;
+    bufferedBulkGPIORead = 0;
     // g_bufferedADCRead = 0;
     // g_adcStatus = 0;
     // g_pwmStatus = 0;
@@ -125,14 +126,14 @@ void AbstractModule::setDateCode()
     day = atoi(buf + 4);
     year = atoi(buf + 7);
 
-    gDateCode = day & 0x1F; // top 5 bits are day of month
-    gDateCode <<= 4;
-    gDateCode |= month & 0x0F; // middle 4 bits are month
-    gDateCode <<= 7;
-    gDateCode |= (year - 2000) & 0x7F; // bottom 7 bits are year
+    dateCode = day & 0x1F; // top 5 bits are day of month
+    dateCode <<= 4;
+    dateCode |= month & 0x0F; // middle 4 bits are month
+    dateCode <<= 7;
+    dateCode |= (year - 2000) & 0x7F; // bottom 7 bits are year
 
-    gVersion = ((uint32_t)MODULE_PRODUCT_CODE) << 16;
-    gVersion |= (((uint32_t)gDateCode) & 0x0000ffff);
+    version = ((uint32_t)MODULE_PRODUCT_CODE) << 16;
+    version |= (((uint32_t)dateCode) & 0x0000ffff);
 }
 
 /**
@@ -347,7 +348,7 @@ void AbstractModule::requestEvent()
     // {
     //     if (module_cmd == SEESAW_GPIO_BULK)
     //     {
-    //         write32(g_bufferedBulkGPIORead); // instant reply because we did the write before
+    //         write32(bufferedBulkGPIORead); // instant reply because we did the write before
     //     }
     // }
     // else if (base_cmd == SEESAW_ADC_BASE)
@@ -411,7 +412,7 @@ void AbstractModule::handleGpioReceive()
             // in the future to be less confusing.
 
             // we're about to request the data next so we'll do the read now
-            g_bufferedBulkGPIORead = readBulk(VALID_GPIO);
+            bufferedBulkGPIORead = readBulk(VALID_GPIO);
         }
         else
         {
@@ -599,7 +600,7 @@ void AbstractModule::handleStatusRequest()
         Wire.write(MODULE_HW_ID); // instant reply
         break;
     case SEESAW_STATUS_VERSION:
-        write32(gVersion); // instant reply
+        write32(version); // instant reply
         break;
     case SEESAW_STATUS_COUNT:
         Wire.write(MODULE_CHANNELS); // instant reply
@@ -611,7 +612,7 @@ void AbstractModule::handleGpioRequest()
 {
     if (i2cBuffer[1] == SEESAW_GPIO_BULK)
     {
-        write32(g_bufferedBulkGPIORead); // instant reply because we did the write before
+        write32(bufferedBulkGPIORead); // instant reply because we did the write before
     }
 }
 
