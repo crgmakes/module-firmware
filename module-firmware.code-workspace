@@ -30,6 +30,18 @@
 		{
 			"name": "Event",
 			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/Event"
+		},
+		{
+			"name": "Logic",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/Logic"
+		},
+		{
+			"name": "Optiboot_flasher",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/Optiboot_flasher"
+		},
+		{
+			"name": "SD",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/SD"
 		}
 	],
 	"settings": {
