@@ -46,6 +46,14 @@
 		{
 			"name": "SPI",
 			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/SPI"
+		},
+		{
+			"name": "Servo",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/Servo"
+		},
+		{
+			"name": "Servo_megaTinyCore",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/Servo_megaTinyCore"
 		}
 	],
 	"settings": {
