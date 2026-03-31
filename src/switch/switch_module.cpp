@@ -4,7 +4,7 @@
  * @date June 8, 2025
  * @author cyberreefguru
  */
-#include "RelayModule.h"
+#include "SwitchModule.h"
 
 void setup()
 {
@@ -13,7 +13,7 @@ void setup()
   delay(500);
 #endif
 
-  module = new RelayModule();
+  module = new SwitchModule();
 
   module->initialize();
   module->begin();

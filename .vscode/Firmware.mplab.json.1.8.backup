@@ -1,5 +1,27 @@
 {
-    "version": "1.9",
+    "version": "1.8",
+    "configurations": [
+        {
+            "name": "servo",
+            "id": "",
+            "device": "ATtiny1616",
+            "imageType": "application",
+            "imagePath": ".pio/build/servo1_1/firmware.elf",
+            "toolProperties": "pickit5-tool-base",
+            "tool": "PICkit 5",
+            "packs": [
+                {
+                    "name": "ATtiny_DFP",
+                    "vendor": "Microchip",
+                    "version": "3.3.272"
+                }
+            ],
+            "fileSet": "servo1_1",
+            "toolchain": "default-AVR-GCC",
+            "preBuildSteps": [],
+            "postBuildSteps": []
+        }
+    ],
     "propertyGroups": [
         {
             "name": "servo firmware-uservariables",
@@ -52,29 +74,6 @@
                 "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/variants/txy6/**/*",
                 "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/variants/txy6/*"
             ]
-        }
-    ],
-    "configurations": [
-        {
-            "name": "servo",
-            "id": "",
-            "device": "ATtiny1616",
-            "imageType": "application",
-            "imagePath": ".pio/build/servo1_1/firmware.elf",
-            "toolProperties": "pickit5-tool-base",
-            "tool": "PICkit 5",
-            "packs": [
-                {
-                    "name": "ATtiny_DFP",
-                    "vendor": "Microchip",
-                    "version": "3.3.272"
-                }
-            ],
-            "fileSet": "servo1_1",
-            "toolchain": "default-AVR-GCC",
-            "preBuildSteps": [],
-            "postBuildSteps": [],
-            "includeLegacyMacros": true
         }
     ]
 }

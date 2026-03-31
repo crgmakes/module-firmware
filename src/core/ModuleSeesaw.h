@@ -37,7 +37,7 @@ enum
   // Peripherals
   SEESAW_SERVO_BASE = 0x21,
   SEESAW_MOTOR_BASE = 0x22,
-  SEESAW_RELAY_BASE = 0x23,
+  SEESAW_SWITCH_BASE = 0x23,
   SEESAW_IR_BASE = 0x24,
   SEESAW_RF_BASE = 0x25,
 
@@ -188,12 +188,12 @@ enum
 };
 
 /**
- * Relay registers
+ * Switch registers
  */
 enum
 {
-    SEESAW_RELAY_BULK = 0x01,
-    SEESAW_RELAY_CHANNEL = 0x02,
+    SEESAW_SWITCH_BULK = 0x01,
+    SEESAW_SWITCH_CHANNEL = 0x02,
 };
 
 /**

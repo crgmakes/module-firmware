@@ -1,6 +1,6 @@
 /**
- * @brief Class representing a GPIO module
- * @file RelayModule.h
+ * @brief Class representing a Switch module
+ * @file SwitchModule.h
  * @date 26 Jan 2026
  * @author cyberreefguru
  */
@@ -9,11 +9,11 @@
 #include <Arduino.h>
 #include <core/AbstractModule.h>
 
-class Relay
+class Switch
 {
 public:
-    Relay();
-    virtual ~Relay(){}
+    Switch();
+    virtual ~Switch(){}
 
     void initialize(uint8_t pin);
     void set(bool b);
@@ -23,19 +23,19 @@ protected:
     uint8_t pin = 0;
 };
 
-class RelayModule : public AbstractModule
+class SwitchModule : public AbstractModule
 {
 public:
-    RelayModule();
-    virtual ~RelayModule();
+    SwitchModule();
+    virtual ~SwitchModule();
     virtual void initialize() override;
 
 protected:
 private:
-    Relay relays[MODULE_CHANNELS];
+    Switch switches[MODULE_CHANNELS];
 
-    RelayModule(const RelayModule &) = delete;
-    RelayModule &operator=(const RelayModule &) = delete;
+    SwitchModule(const SwitchModule &) = delete;
+    SwitchModule &operator=(const SwitchModule &) = delete;
 
     virtual void handleReceiveEvent() override;
     virtual void handleRequestEvent() override;

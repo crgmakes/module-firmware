@@ -54,6 +54,10 @@
 		{
 			"name": "Servo_megaTinyCore",
 			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/Servo_megaTinyCore"
+		},
+		{
+			"name": "SoftwareSerial",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/SoftwareSerial"
 		}
 	],
 	"settings": {
