@@ -1,5 +1,6 @@
 {
     "recommendations": [
+        "microchip.mplab-extension-pack",
         "pioarduino.pioarduino-ide",
         "platformio.platformio-ide"
     ],

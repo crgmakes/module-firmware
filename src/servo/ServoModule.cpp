@@ -31,49 +31,79 @@ void ServoModule::initialize()
     servos[2].write(0); // this needs to be pulled from EEPROM
 }
 
+/**
+ * @brief handles any data received from the controller. Usually setting a register to a value.
+ */
 void ServoModule::handleReceiveEvent()
 {
     if (i2cBuffer[0] == SEESAW_SERVO_BASE)
     {
         if (receiveLength == 2)
         {
-            // This is a read command
+            // Writing two bytes is really writing the command and function for an upcoming read
             return;
         }
 
-        uint8_t channel = i2cBuffer[2];
-        if (channel >= MODULE_CHANNELS)
+        if (i2cBuffer[1] == SEESAW_SERVO_ANGLE)
         {
-            SEESAW_DEBUG(F("channel out of range: "));
-            SEESAW_DEBUGLN(channel);
-            return;
-        }
+            // We have more than two bytes, so let's "parse" the data
+            // For a servo command, the 3rd byte is the channel
+            uint8_t channel = i2cBuffer[2];
 
-        uint8_t angle = i2cBuffer[3];
-        servos[channel].write(angle);
-        values[channel] = angle;
+            // Check if channel is out of bounds
+            if (channel >= MODULE_CHANNELS)
+            {
+                SEESAW_DEBUG(F("channel out of range: "));
+                SEESAW_DEBUGLN(channel);
+                return;
+            }
+
+            uint8_t angle = i2cBuffer[3];
+            servos[channel].write(angle);
+            values[channel] = angle;
+        }
+        else
+        {
+            SEESAW_DEBUG(F("Unhandled receive function 0x"));
+            SEESAW_DEBUGLN(i2cBuffer[1], HEX);
+        }
     }
     else
     {
         SEESAW_DEBUG(F("Unhandled receive cmd 0x"));
-        SEESAW_DEBUGLN(base_cmd, HEX);
+        SEESAW_DEBUGLN(i2cBuffer[0], HEX);
     }
 }
 
+/**
+ * @brief Handles the controller writing data to us and expecting some sort of response
+ */
 void ServoModule::handleRequestEvent()
 {
+    // NOTE: the last receiveEvent filled the i2cbuffer with information about this command
     if (i2cBuffer[0] == SEESAW_SERVO_BASE)
     {
+        uint8_t func = i2cBuffer[1];
+        if (func > SEESAW_SERVO_SPEED)
+        {
+            SEESAW_DEBUG(F("Requested cuntions out of range: "));
+            SEESAW_DEBUGLN(i2cBuffer[1]);
+            return;
+        }
+
         uint8_t channel = i2cBuffer[2];
-        uint8_t angle = 0;
         if (channel >= MODULE_CHANNELS)
         {
             SEESAW_DEBUG(F("Requested channel out of range: "));
             SEESAW_DEBUGLN(channel);
             Wire.write(0xff); // instant reply
+            return;
         }
-        else
+
+        switch (func)
         {
+        case SEESAW_SERVO_ANGLE:
+            uint8_t angle = 0;
             angle = (servos[channel].read() & 0x0ff);
             if (angle > 180)
             {
@@ -83,11 +113,15 @@ void ServoModule::handleRequestEvent()
             {
                 Wire.write(angle); // instant reply
             }
+            break;
+        case SEESAW_SERVO_SPEED:
+            Wire.write(0xff); // instant reply
+            break;
         }
     }
     else
     {
         SEESAW_DEBUG(F("Unhandled request cmd 0x"));
-        SEESAW_DEBUGLN(base_cmd, HEX);
+        SEESAW_DEBUGLN(i2cBuffer[0], HEX);
     }
 }

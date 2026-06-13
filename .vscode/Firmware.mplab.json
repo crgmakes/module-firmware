@@ -7,6 +7,11 @@
             "properties": {}
         },
         {
+            "name": "servo-uservariables",
+            "type": "uservariables",
+            "properties": {}
+        },
+        {
             "name": "default-AVR-GCC",
             "type": "toolchain",
             "provider": "microchip.toolchains:avr-gcc@7.3.0",
@@ -16,14 +21,16 @@
                     "\"/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/variants/txy6\"",
                     "\"/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/libraries\"",
                     "\"/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/Comparator\""
-                ]
+                ],
+                "global.external-ram-check": true,
+                "compiler.optimization-level": "-O0"
             }
         },
         {
             "name": "pickit5-tool-base",
             "type": "tool",
             "properties": {
-                "poweroptions.powerenable": true,
+                "poweroptions.powerenable": false,
                 "voltagevalue": "3.3"
             }
         }
@@ -66,14 +73,13 @@
             "packs": [
                 {
                     "name": "ATtiny_DFP",
-                    "vendor": "Microchip",
-                    "version": "3.3.272"
+                    "version": "3.4.278",
+                    "vendor": "Microchip"
                 }
             ],
             "fileSet": "servo1_1",
             "toolchain": "default-AVR-GCC",
-            "preBuildSteps": [],
-            "postBuildSteps": [],
+            "userVariables": "servo-uservariables",
             "includeLegacyMacros": true
         }
     ]

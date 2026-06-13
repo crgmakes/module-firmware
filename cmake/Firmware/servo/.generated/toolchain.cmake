@@ -9,16 +9,13 @@ set(CMAKE_CXX_COMPILER_WORKS YES CACHE BOOL "Tell CMake that the compiler works,
 set(MP_CPPC "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin/avr-g++" CACHE PATH "Legacy variable from MPLAB X pointing to the c++ compiler")
 set(MP_CPPC_DIR "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin" CACHE PATH "Legacy variable from MPLAB X pointing to the c++ compiler base directory")
 set(CMAKE_CXX_COMPILER "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin/avr-g++" CACHE FILEPATH "Path to the compiler binary.")
-# Legacy variable from MPLAB X pointing to the compiler base directory.
-set(MP_CPPC_DIR ${CMAKE_CXX_COMPILER})
+set(MP_CPPC_DIR "${CMAKE_CXX_COMPILER}" CACHE PATH "Legacy variable from MPLAB X pointing to the compiler base directory.")
 
 set(CMAKE_ASM_COMPILER_WORKS YES CACHE BOOL "Tell CMake that the assembler works, but cannot be run during the configuration stage")
 set(MP_AS "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin/avr-gcc" CACHE PATH "Legacy variable from MPLAB X pointing to the assembler")
 set(MP_AS_DIR "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin" CACHE PATH "Legacy variable from MPLAB X pointing to the assembler base directory")
 set(CMAKE_ASM_COMPILER "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin/avr-gcc" CACHE FILEPATH "Path to the compiler binary.")
-
-# Legacy variable from MPLAB X pointing to the assembler binary.
-set(MP_AS ${CMAKE_ASM_COMPILER})
+set(MP_AS "${CMAKE_ASM_COMPILER}" CACHE FILEPATH "Legacy variable from MPLAB X pointing to the assembler binary.")
 
 set(MP_LD "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin/avr-ld" CACHE FILEPATH "Legacy variable from MPLAB X pointing to the linker binary.")
 set(MP_LD_DIR "/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin" CACHE PATH "Legacy variable from MPLAB X pointing to the linker base directory")

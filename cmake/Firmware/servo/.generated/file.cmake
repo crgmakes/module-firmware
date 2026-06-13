@@ -94,3 +94,12 @@ set(Firmware_servo_output_dir "${CMAKE_CURRENT_SOURCE_DIR}/../../../.pio/build/s
 
 # The full path to the final image.
 set(Firmware_servo_full_path_to_image ${Firmware_servo_output_dir}/${Firmware_servo_image_name})
+
+# Potential output file extensions
+set(output_extensions
+    .hex
+    .lss
+    .eep
+    .srec
+    .usersignatures)
+list(TRANSFORM output_extensions PREPEND "${Firmware_servo_output_dir}/${Firmware_servo_image_base_name}")

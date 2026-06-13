@@ -58,6 +58,18 @@
 		{
 			"name": "SoftwareSerial",
 			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/SoftwareSerial"
+		},
+		{
+			"name": "USERSIG",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/USERSIG"
+		},
+		{
+			"name": "Wire",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/Wire"
+		},
+		{
+			"name": "megaTinyCore",
+			"path": "../../../.platformio/packages/framework-arduino-megaavr-megatinycore/libraries/megaTinyCore"
 		}
 	],
 	"settings": {
@@ -71,6 +83,7 @@
 			"--compile-commands-dir=${workspaceFolder}/_build/Firmware/servo"
 		],
 		"mplab.clangd.path": "",
-		"mplab.project.workspace.addNewSourceFiles": "Never"
+		"mplab.project.workspace.addNewSourceFiles": "Never",
+		"mplab.clangd.compileCommandsDir": "${workspaceFolder}/_build/Firmware/servo"
 	}
 }

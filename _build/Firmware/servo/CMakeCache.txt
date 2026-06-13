@@ -50,6 +50,9 @@ CMAKE_ASM_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 // MinSizeRel ...
 CMAKE_BUILD_TYPE:STRING=
 
+//Enable colored diagnostics throughout.
+CMAKE_COLOR_DIAGNOSTICS:BOOL=ON
+
 //CXX compiler
 CMAKE_CXX_COMPILER:STRING=/Users/tsasala/.mplab/app-finder/apps/avr-gcc/v7.3.0/avr8-gnu-toolchain-darwin_x86_64/bin/avr-g++
 

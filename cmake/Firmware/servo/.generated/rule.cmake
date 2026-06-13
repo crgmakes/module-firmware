@@ -8,7 +8,7 @@ function(Firmware_servo_default_AVR_GCC_assemble_rule target)
         "assembler-with-cpp"
         "${MP_EXTRA_AS_PRE}"
         "-mmcu=attiny1616"
-        "-B${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.3.272/gcc/dev/attiny1616"
+        "-B${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.4.278/gcc/dev/attiny1616"
         "-c"
         "-Wa,--defsym=__MPLAB_BUILD=1${MP_EXTRA_AS_POST},--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,--gdwarf-2,-g")
     list(REMOVE_ITEM options "")
@@ -18,7 +18,7 @@ function(Firmware_servo_default_AVR_GCC_assemble_rule target)
         PRIVATE "__ATtiny1616__"
         PRIVATE "servo=servo")
     target_include_directories(${target}
-        PRIVATE "${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.3.272/include"
+        PRIVATE "${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.4.278/include"
         PRIVATE "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore"
         PRIVATE "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/variants/txy6"
         PRIVATE "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/libraries"
@@ -30,7 +30,7 @@ function(Firmware_servo_default_AVR_GCC_assembleWithPreprocess_rule target)
         "assembler-with-cpp"
         "${MP_EXTRA_AS_PRE}"
         "-mmcu=attiny1616"
-        "-B${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.3.272/gcc/dev/attiny1616"
+        "-B${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.4.278/gcc/dev/attiny1616"
         "-c"
         "-Wa,--defsym=__MPLAB_BUILD=1${MP_EXTRA_AS_POST},--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,--gdwarf-2,-g")
     list(REMOVE_ITEM options "")
@@ -40,7 +40,7 @@ function(Firmware_servo_default_AVR_GCC_assembleWithPreprocess_rule target)
         PRIVATE "__ATtiny1616__"
         PRIVATE "servo=servo")
     target_include_directories(${target}
-        PRIVATE "${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.3.272/include"
+        PRIVATE "${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.4.278/include"
         PRIVATE "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore"
         PRIVATE "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/variants/txy6"
         PRIVATE "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/libraries"
@@ -52,13 +52,13 @@ function(Firmware_servo_default_AVR_GCC_compile_rule target)
         "-gdwarf-2"
         "${MP_EXTRA_CC_PRE}"
         "-mmcu=attiny1616"
-        "-B${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.3.272/gcc/dev/attiny1616"
+        "-B${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.4.278/gcc/dev/attiny1616"
         "-x"
         "c"
         "-c"
         "-funsigned-char"
         "-funsigned-bitfields"
-        "-O1"
+        "-O0"
         "-ffunction-sections"
         "-fdata-sections"
         "-fpack-struct"
@@ -71,7 +71,7 @@ function(Firmware_servo_default_AVR_GCC_compile_rule target)
         PRIVATE "__ATtiny1616__"
         PRIVATE "servo=servo")
     target_include_directories(${target}
-        PRIVATE "${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.3.272/include"
+        PRIVATE "${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.4.278/include"
         PRIVATE "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore"
         PRIVATE "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/variants/txy6"
         PRIVATE "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/libraries"
@@ -83,7 +83,7 @@ function(Firmware_servo_default_AVR_GCC_compile_cpp_rule target)
         "-gdwarf-2"
         "${MP_EXTRA_CC_PRE}"
         "-mmcu=attiny1616"
-        "-B${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.3.272/gcc/dev/attiny1616"
+        "-B${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.4.278/gcc/dev/attiny1616"
         "-x"
         "c++"
         "-c"
@@ -102,7 +102,7 @@ function(Firmware_servo_default_AVR_GCC_compile_cpp_rule target)
         PRIVATE "__ATtiny1616__"
         PRIVATE "servo=servo")
     target_include_directories(${target}
-        PRIVATE "${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.3.272/include"
+        PRIVATE "${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.4.278/include"
         PRIVATE "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/cores/megatinycore"
         PRIVATE "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/variants/txy6"
         PRIVATE "/Users/tsasala/.platformio/packages/framework-arduino-megaavr-megatinycore/libraries"
@@ -113,7 +113,8 @@ function(Firmware_servo_link_rule target)
         "-gdwarf-2"
         "${MP_EXTRA_LD_PRE}"
         "-mmcu=attiny1616"
-        "-B${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.3.272/gcc/dev/attiny1616"
+        "-B${PACK_REPO_PATH}/Microchip/ATtiny_DFP/3.4.278/gcc/dev/attiny1616"
+        "-Wl,-Map=mem.map"
         "-Wl,--defsym=__MPLAB_BUILD=1${MP_EXTRA_LD_POST},--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1"
         "-Wl,--gc-sections")
     list(REMOVE_ITEM options "")

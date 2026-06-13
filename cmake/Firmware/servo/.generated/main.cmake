@@ -1,4 +1,3 @@
-# cmake files support debug production
 include("${CMAKE_CURRENT_LIST_DIR}/rule.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/file.cmake")
 
@@ -80,10 +79,11 @@ endif()
 # Main target for this project
 add_executable(Firmware_servo_image__RgkSZSs ${Firmware_servo_library_list})
 
-set_target_properties(Firmware_servo_image__RgkSZSs PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${Firmware_servo_output_dir})
-set_target_properties(Firmware_servo_image__RgkSZSs PROPERTIES OUTPUT_NAME "firmware")
-set_target_properties(Firmware_servo_image__RgkSZSs PROPERTIES SUFFIX ".elf")
-
+set_target_properties(Firmware_servo_image__RgkSZSs PROPERTIES
+    OUTPUT_NAME "firmware"
+    SUFFIX ".elf"
+    ADDITIONAL_CLEAN_FILES "${output_extensions}"
+    RUNTIME_OUTPUT_DIRECTORY "${Firmware_servo_output_dir}")
 target_link_libraries(Firmware_servo_image__RgkSZSs PRIVATE ${Firmware_servo_default_AVR_GCC_FILE_TYPE_link})
 
 #Add objcopy steps
@@ -92,9 +92,13 @@ Firmware_servo_objcopy_eep_rule(Firmware_servo_image__RgkSZSs)
 Firmware_servo_objcopy_lss_rule(Firmware_servo_image__RgkSZSs)
 Firmware_servo_objcopy_srec_rule(Firmware_servo_image__RgkSZSs)
 Firmware_servo_objcopy_sig_rule(Firmware_servo_image__RgkSZSs)
-
 # Add the link options from the rule file.
-Firmware_servo_link_rule(Firmware_servo_image__RgkSZSs)
+Firmware_servo_link_rule( Firmware_servo_image__RgkSZSs)
 
-
+add_custom_target(
+    merge_loadable_files ALL
+    COMMAND hexmate  /Users/tsasala/Development/Aquarius New/module-firmware/.pio/build/servo1_1/firmware.hex "${CMAKE_CURRENT_SOURCE_DIR}/../../../.pio/build/servo1_1/firmware.hex"  -O"${CMAKE_CURRENT_SOURCE_DIR}/../../../.pio/build/servo1_1/firmware-unified.hex"
+    BYPRODUCTS "${CMAKE_CURRENT_SOURCE_DIR}/../../../.pio/build/servo1_1/firmware-unified.hex"
+    COMMENT "Merging loadable hex files into unified image")
+add_dependencies(merge_loadable_files Firmware_servo_image__RgkSZSs)
 
