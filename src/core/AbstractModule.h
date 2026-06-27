@@ -31,33 +31,33 @@
 #error ("CONFIG_UART_DEBUG must be 0 or 1")
 #endif
 
-#define UART_DEBUG_RXD 6
-#define UART_DEBUG_TXD 7
+// #define UART_DEBUG_RXD 6
+// #define UART_DEBUG_TXD 7
 
-/* ======================= GPIO masks ======================= */
+// /* ======================= GPIO masks ======================= */
 
-#define ALL_GPIO 0x01FFFFUL
-#define ALL_ADC 0b11100001100111111
+// #define ALL_GPIO 0x01FFFFUL
+// #define ALL_ADC 0b11100001100111111
 
-// See: https://github.com/adafruit/Adafruit_seesawPeripheral/pull/14
-//      https://github.com/SpenceKonde/megaTinyCore/blob/master/megaavr/extras/Ref_Timers.md#servo-library
-// TINYX6_PWM_PINS = (4, 5, 6)
-// #define ALL_PWM ((1UL << 6) | (1UL << 7) | (1UL << 8))
+// // See: https://github.com/adafruit/Adafruit_seesawPeripheral/pull/14
+// //      https://github.com/SpenceKonde/megaTinyCore/blob/master/megaavr/extras/Ref_Timers.md#servo-library
+// // TINYX6_PWM_PINS = (4, 5, 6)
+// // #define ALL_PWM ((1UL << 6) | (1UL << 7) | (1UL << 8))
 
-#define PWM_WO_OFFSET 4
-#define ALL_PWM ((1UL << SERVO_1_PIN) | (1UL << SERVO_2_PIN) | (1UL << SERVO_3_PIN))
+// #define PWM_WO_OFFSET 4
+// #define ALL_PWM ((1UL << SERVO_1_PIN) | (1UL << SERVO_2_PIN) | (1UL << SERVO_3_PIN))
 
-#define INVALID_GPIO (((uint32_t)1 << SDA) |               \
-                      ((uint32_t)1 << SCL) |               \
-                      ((uint32_t)1 << UART_DEBUG_RXD) |    \
-                      ((uint32_t)1 << UART_DEBUG_TXD) |    \
-                      ((uint32_t)1 << PIN_PA0) |           \
-                      ((uint32_t)1 << MODULE_ADDR_PIN_0) | \
-                      ((uint32_t)1 << MODULE_ADDR_PIN_1))
+// #define INVALID_GPIO (((uint32_t)1 << SDA) |               \
+//                       ((uint32_t)1 << SCL) |               \
+//                       ((uint32_t)1 << UART_DEBUG_RXD) |    \
+//                       ((uint32_t)1 << UART_DEBUG_TXD) |    \
+//                       ((uint32_t)1 << PIN_PA0) |           \
+//                       ((uint32_t)1 << MODULE_ADDR_PIN_0) | \
+//                       ((uint32_t)1 << MODULE_ADDR_PIN_1))
 
-#define VALID_GPIO (ALL_GPIO & ~INVALID_GPIO)
-#define VALID_ADC (ALL_ADC & VALID_GPIO)
-#define VALID_PWM (ALL_PWM & VALID_GPIO)
+// #define VALID_GPIO (ALL_GPIO & ~INVALID_GPIO)
+// #define VALID_ADC (ALL_ADC & VALID_GPIO)
+// #define VALID_PWM (ALL_PWM & VALID_GPIO)
 
 #define MODULE_PRODUCT_CODE (0xAA00 | MODULE_ADDRESS)
 

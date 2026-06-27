@@ -13,6 +13,8 @@ void setup()
   delay(500);
 #endif
 
+  pinMode(LED_BUILTIN, OUTPUT);
+
   module = new ServoModule();
 
   module->initialize();
@@ -22,5 +24,8 @@ void setup()
 void loop()
 {
   // Adafruit_seesawPeripheral_run();
-  delay(10);
+  digitalWrite(LED_BUILTIN, HIGH);  // change state of the LED by setting the pin to the HIGH voltage level
+  delay(750);                      // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);   // change state of the LED by setting the pin to the LOW voltage level
+  delay(750);                      // wait for a second
 }

@@ -100,10 +100,10 @@ void ServoModule::handleRequestEvent()
             return;
         }
 
+        uint8_t angle = 0;
         switch (func)
         {
         case SEESAW_SERVO_ANGLE:
-            uint8_t angle = 0;
             angle = (servos[channel].read() & 0x0ff);
             if (angle > 180)
             {

@@ -33,7 +33,8 @@ AbstractModule::~AbstractModule() {}
 void AbstractModule::initialize()
 {
     // Disable interrupts
-    cli();
+    // cli();
+    noInterrupts();
 
     // End any pending wire initialization/transmission
     Wire.end();
@@ -53,15 +54,17 @@ void AbstractModule::initialize()
     SEESAW_DEBUG(F("I2C 0x"));
     SEESAW_DEBUGLN(i2cAddr, HEX);
 
-    uint32_t pins = VALID_GPIO;
-    for (uint8_t pin = 0; pin < 32; pin++)
-    {
-        if ((pins >> pin) & 0x1)
-        {
-            pinMode(pin, INPUT_PULLUP);
-            digitalWrite(pin, 0);
-        }
-    }
+    // TODO - put GPIO setup code here?? Or delegate to moduel implementation?
+
+    // uint32_t pins = VALID_GPIO;
+    // for (uint8_t pin = 0; pin < 32; pin++)
+    // {
+    //     if ((pins >> pin) & 0x1)
+    //     {
+    //         pinMode(pin, INPUT_PULLUP);
+    //         digitalWrite(pin, 0);
+    //     }
+    // }
 
     setDateCode();
 
@@ -69,7 +72,9 @@ void AbstractModule::initialize()
     Wire.begin(i2cAddr);
 
     // Re-enable interrupts
-    sei();
+    // sei();
+    interrupts();
+
 }
 
 void AbstractModule::begin()
@@ -124,30 +129,31 @@ void AbstractModule::setDateCode()
  * @param validpins
  * @return returns inputs based on valid pins
  */
-uint32_t AbstractModule::readBulk(uint32_t validpins = VALID_GPIO)
+// uint32_t AbstractModule::readBulk(uint32_t validpins = VALID_GPIO)
+uint32_t AbstractModule::readBulk(uint32_t validpins = 0)
 {
     uint32_t temp = 0;
 
     // read all ports
-    uint8_t port_reads[3] = {0, 0, 0};
-    port_reads[0] = VPORTA.IN;
-    port_reads[1] = VPORTB.IN;
-    port_reads[2] = VPORTC.IN;
+    // uint8_t port_reads[3] = {0, 0, 0};
+    // port_reads[0] = VPORTA.IN;
+    // port_reads[1] = VPORTB.IN;
+    // port_reads[2] = VPORTC.IN;
 
-    for (uint8_t pin = 0; pin < 32; pin++)
-    {
-        temp >>= 1;
-        if (validpins & 0x1)
-        {
-            uint8_t mask = 1 << digital_pin_to_bit_position[pin];
-            uint8_t port = digital_pin_to_port[pin];
-            if (port_reads[port] & mask)
-            {
-                temp |= 0x80000000UL;
-            }
-        }
-        validpins >>= 1;
-    }
+    // for (uint8_t pin = 0; pin < 32; pin++)
+    // {
+    //     temp >>= 1;
+    //     if (validpins & 0x1)
+    //     {
+    //         uint8_t mask = 1 << digital_pin_to_bit_position[pin];
+    //         uint8_t port = digital_pin_to_port[pin];
+    //         if (port_reads[port] & mask)
+    //         {
+    //             temp |= 0x80000000UL;
+    //         }
+    //     }
+    //     validpins >>= 1;
+    // }
     return temp;
 }
 
@@ -265,7 +271,7 @@ void AbstractModule::handleGpioReceive()
     // All GPIO commands must have a 4 byte payload indicating
     // the pins or GPIO that should be affected.
     // Build single 32-bit variable representing the pins
-    uint32_t temp;
+    uint32_t temp = 0;
     temp = i2cBuffer[2];
     temp <<= 8;
     temp |= i2cBuffer[3];
@@ -287,7 +293,8 @@ void AbstractModule::handleGpioReceive()
             // in the future to be less confusing.
 
             // we're about to request the data next so we'll do the read now
-            bufferedBulkGPIORead = readBulk(VALID_GPIO);
+            //bufferedBulkGPIORead = readBulk(VALID_GPIO);
+            bufferedBulkGPIORead = readBulk();
         }
         else
         {
@@ -295,13 +302,13 @@ void AbstractModule::handleGpioReceive()
             uint32_t pinmask = 0x1;
             for (uint8_t pin = 0; pin < 32; pin++)
             {
-                if (VALID_GPIO & pinmask)
-                {
-                    // Set or reset the pin based on value of temp
-                    // 0 = clear (low); 1 = set (high)
-                    digitalWrite(pin, (temp >> pin) & 0x1);
-                }
-                pinmask <<= 1;
+                // if (VALID_GPIO & pinmask)
+                // {
+                //     // Set or reset the pin based on value of temp
+                //     // 0 = clear (low); 1 = set (high)
+                //     digitalWrite(pin, (temp >> pin) & 0x1);
+                // }
+                // pinmask <<= 1;
             }
         }
         break;
@@ -312,7 +319,7 @@ void AbstractModule::handleGpioReceive()
     case SEESAW_GPIO_PULLENSET:
     case SEESAW_GPIO_PULLENCLR:
     case SEESAW_GPIO_INTENSET:
-        temp &= VALID_GPIO;
+        //temp &= VALID_GPIO;
         for (uint8_t pin = 0; pin < 32; pin++)
         {
             if ((temp >> pin) & 0x1)
@@ -354,8 +361,9 @@ void AbstractModule::handleGpioReceive()
                     // Optional: handle unknown commands
                     break;
                 }
-            }
-        }
+            } // end if temp
+        } // end for
+        break;
     }
 }
 
