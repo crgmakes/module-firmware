@@ -8,9 +8,6 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include <wiring_private.h>
-#include <pins_arduino.h>
-#include <EEPROM.h>
 
 #include <core/ModuleHardware.h>
 #include <core/ModuleSeesaw.h>
@@ -75,6 +72,7 @@ public:
   uint32_t readBulk(uint32_t validpins);
 
 protected:
+  // TwoWire *i2c = nullptr;
   uint8_t i2cAddr;
   volatile uint8_t i2cBuffer[32];
   volatile uint8_t receiveLength;
@@ -86,6 +84,8 @@ protected:
   // volatile uint16_t g_bufferedADCRead;
   // volatile uint8_t g_adcStatus;
   // volatile uint8_t g_pwmStatus;
+
+  void fail();
 
   void setDateCode();
   void write16(uint16_t value);

@@ -36,7 +36,7 @@ void AbstractModule::initialize()
     // cli();
     noInterrupts();
 
-    // End any pending wire initialization/transmission
+    // Blindly end wire bus
     Wire.end();
 
     // Set address bits to input
@@ -46,10 +46,10 @@ void AbstractModule::initialize()
     // Figure out what our I2C address is
     i2cAddr = MODULE_ADDRESS;
 
-    uint8_t p = digitalReadFast(MODULE_ADDR_PIN_0);
-    p |= (digitalReadFast(MODULE_ADDR_PIN_1) << 1);
-    p = (~p & 0x03); // invert active low address bits
-    i2cAddr += p;    // add to base address
+    // uint8_t p = digitalReadFast(MODULE_ADDR_PIN_0);
+    // p |= (digitalReadFast(MODULE_ADDR_PIN_1) << 1);
+    // p = (~p & 0x03); // invert active low address bits
+    // i2cAddr += p;    // add to base address
 
     SEESAW_DEBUG(F("I2C 0x"));
     SEESAW_DEBUGLN(i2cAddr, HEX);
@@ -68,13 +68,16 @@ void AbstractModule::initialize()
 
     setDateCode();
 
-    // Start I2C bus
+    // Create new I2C Client
+    // i2c = new TwoWire(MODULE_I2C_SDA, MODULE_I2C_SCL);
+    // i2c->begin(i2cAddr);
+
+    // // Start I2C bus
     Wire.begin(i2cAddr);
 
     // Re-enable interrupts
     // sei();
     interrupts();
-
 }
 
 void AbstractModule::begin()
@@ -88,6 +91,31 @@ void AbstractModule::begin()
                    {
                        module->requestEvent(); // request events
                    });
+    // i2c->onReceive([](int howMany)
+    //                {
+    //                    module->receiveEvent(howMany); // receive events
+    //                });
+
+    // i2c->onRequest([]()
+    //                {
+    //                    module->requestEvent(); // request events
+    //                });
+}
+
+void AbstractModule::fail()
+{
+    while (1)
+    {
+        // Adafruit_seesawPeripheral_run();
+        digitalWrite(LED_BUILTIN, HIGH); // change state of the LED by setting the pin to the HIGH voltage level
+        // ((ServoModule*)module)->set(0, 180);
+        // ((ServoModule*)module)->set(3, 1);
+        delay(100);                     // wait for a second
+        digitalWrite(LED_BUILTIN, LOW); // change state of the LED by setting the pin to the LOW voltage level
+        // ((ServoModule*)module)->set(0, 0);
+        // ((ServoModule*)module)->set(3, 0);
+        delay(100); // wait for a second
+    }
 }
 
 /**
@@ -106,8 +134,8 @@ void AbstractModule::setDateCode()
     // __DATE__ format: 'Mmm dd yyyy'
     strncpy(buf, __DATE__, 11);
 
-    buf[3] = 0; // null terminator after month
-    buf[6] = 0; // null terminator after day
+    buf[3] = 0;  // null terminator after month
+    buf[6] = 0;  // null terminator after day
     buf[11] = 0; // null terminator after year
 
     month = (strstr(month_names, buf) - month_names) / 3 + 1;
@@ -165,6 +193,8 @@ void AbstractModule::write16(uint16_t value)
 {
     Wire.write(value >> 8);
     Wire.write(value);
+    // i2c->write(value >> 8);
+    // i2c->write(value);
 }
 
 /**
@@ -173,6 +203,10 @@ void AbstractModule::write16(uint16_t value)
  */
 void AbstractModule::write32(uint32_t value)
 {
+    // i2c->write(value >> 24);
+    // i2c->write(value >> 16);
+    // i2c->write(value >> 8);
+    // i2c->write(value);
     Wire.write(value >> 24);
     Wire.write(value >> 16);
     Wire.write(value >> 8);
@@ -208,6 +242,7 @@ void AbstractModule::receiveEvent(int howMany)
     // Read the data
     for (uint8_t i = 0; i < receiveLength; i++)
     {
+        // i2cBuffer[i] = i2c->read();
         i2cBuffer[i] = Wire.read();
     }
 
@@ -293,7 +328,7 @@ void AbstractModule::handleGpioReceive()
             // in the future to be less confusing.
 
             // we're about to request the data next so we'll do the read now
-            //bufferedBulkGPIORead = readBulk(VALID_GPIO);
+            // bufferedBulkGPIORead = readBulk(VALID_GPIO);
             bufferedBulkGPIORead = readBulk();
         }
         else
@@ -319,7 +354,7 @@ void AbstractModule::handleGpioReceive()
     case SEESAW_GPIO_PULLENSET:
     case SEESAW_GPIO_PULLENCLR:
     case SEESAW_GPIO_INTENSET:
-        //temp &= VALID_GPIO;
+        // temp &= VALID_GPIO;
         for (uint8_t pin = 0; pin < 32; pin++)
         {
             if ((temp >> pin) & 0x1)
@@ -372,12 +407,14 @@ void AbstractModule::handleStatusRequest()
     switch (i2cBuffer[1])
     {
     case SEESAW_STATUS_HW_ID:
+        //i2c->write(MODULE_HW_ID); // instant reply
         Wire.write(MODULE_HW_ID); // instant reply
         break;
     case SEESAW_STATUS_VERSION:
         write32(version); // instant reply
         break;
     case SEESAW_STATUS_COUNT:
+        //i2c->write(MODULE_CHANNELS); // instant reply
         Wire.write(MODULE_CHANNELS); // instant reply
         break;
     }

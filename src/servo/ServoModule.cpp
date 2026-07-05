@@ -20,15 +20,57 @@ void ServoModule::initialize()
     // Call super initialize
     AbstractModule::initialize();
 
+    pinMode(SERVO_1_PIN, OUTPUT);
+    pinMode(SERVO_2_PIN, OUTPUT);
+    pinMode(SERVO_3_PIN, OUTPUT);
+    pinMode(SERVO_4_PIN, OUTPUT);
+
     // Setup hardware
     servos[0].attach(SERVO_1_PIN);
-    servos[0].write(0); // this needs to be pulled from EEPROM
-
     servos[1].attach(SERVO_2_PIN);
-    servos[1].write(0); // this needs to be pulled from EEPROM
-
     servos[2].attach(SERVO_3_PIN);
+    servos[3].attach(SERVO_4_PIN);
+
+    servos[0].write(0); // this needs to be pulled from EEPROM
+    servos[1].write(0); // this needs to be pulled from EEPROM
     servos[2].write(0); // this needs to be pulled from EEPROM
+    servos[3].write(0); // this needs to be pulled from EEPROM
+
+    // Servo* s= new Servo();
+    // s->attach(PA6);
+    // s->write(0);
+
+    // delay(2000);
+    // for(uint8_t i=0;i<181; i+=10)
+    // {
+    //     s->write(i);
+    //     delay(100);
+    // }
+    // delay(2000);
+    // s->write(0);
+
+}
+
+void ServoModule::set(uint8_t servo, uint8_t value)
+{
+    switch (servo)
+    {
+    case 0:
+        servos[0].write(value);
+        break;
+    case 1:
+        servos[1].write(value);
+        break;
+    case 2:
+        servos[2].write(value);
+        break;
+    case 3:
+        servos[3].write(value);
+        break;
+    default:
+        break;
+    }
+    // servos[servo].write(value);
 }
 
 /**
@@ -96,6 +138,7 @@ void ServoModule::handleRequestEvent()
         {
             SEESAW_DEBUG(F("Requested channel out of range: "));
             SEESAW_DEBUGLN(channel);
+            // i2c->write(0xff); // instant reply
             Wire.write(0xff); // instant reply
             return;
         }
@@ -107,14 +150,17 @@ void ServoModule::handleRequestEvent()
             angle = (servos[channel].read() & 0x0ff);
             if (angle > 180)
             {
+                //i2c->write(0xff); // instant reply
                 Wire.write(0xff); // instant reply
             }
             else
             {
+                // i2c->write(angle); // instant reply
                 Wire.write(angle); // instant reply
             }
             break;
         case SEESAW_SERVO_SPEED:
+            // i2c->write(0xff); // instant reply
             Wire.write(0xff); // instant reply
             break;
         }

@@ -1,5 +1,6 @@
 {
     "recommendations": [
+        "Jason2866.esp-decoder",
         "microchip.mplab-extension-pack",
         "pioarduino.pioarduino-ide",
         "platformio.platformio-ide"

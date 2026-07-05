@@ -6,6 +6,8 @@
  */
 #include "servo/ServoModule.h"
 
+uint8_t value = 0;
+
 void setup()
 {
 #if CONFIG_UART_DEBUG
@@ -19,13 +21,22 @@ void setup()
 
   module->initialize();
   module->begin();
+
+  ((ServoModule*)module)->set(0, 180);
+  delay(1000);
+  ((ServoModule*)module)->set(0, 0);
+
 }
 
 void loop()
 {
   // Adafruit_seesawPeripheral_run();
   digitalWrite(LED_BUILTIN, HIGH);  // change state of the LED by setting the pin to the HIGH voltage level
-  delay(750);                      // wait for a second
+  // ((ServoModule*)module)->set(0, 180);
+  // ((ServoModule*)module)->set(3, 1);
+  delay(1000);                      // wait for a second
   digitalWrite(LED_BUILTIN, LOW);   // change state of the LED by setting the pin to the LOW voltage level
-  delay(750);                      // wait for a second
+  // ((ServoModule*)module)->set(0, 0);
+  // ((ServoModule*)module)->set(3, 0);
+  delay(1000);                      // wait for a second
 }
