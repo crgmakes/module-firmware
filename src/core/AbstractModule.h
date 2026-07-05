@@ -16,9 +16,11 @@
 
 #define EEPROM_I2C_ADDR (EEPROM.length() - 1)
 
-#define CONFIG_UART_DEBUG 0
+// #define CONFIG_UART_DEBUG 0
 
 #if (CONFIG_UART_DEBUG == 1)
+// #define SEESAW_DEBUG(...) SerialVCP.print(__VA_ARGS__)
+// #define SEESAW_DEBUGLN(...) SerialVCP.println(__VA_ARGS__)
 #define SEESAW_DEBUG(...) Serial.print(__VA_ARGS__)
 #define SEESAW_DEBUGLN(...) Serial.println(__VA_ARGS__)
 #elif (CONFIG_UART_DEBUG == 0)
@@ -134,6 +136,7 @@ extern "C"
 #endif
 
   extern AbstractModule *module;
+  extern HardwareSerial SerialVCP;
 
 #ifdef __cplusplus
 } // extern "C"

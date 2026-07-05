@@ -7,13 +7,18 @@
 #include "servo/ServoModule.h"
 
 uint8_t value = 0;
+HardwareSerial SerialVCP(PA3, PA2); // RX, TX
 
 void setup()
 {
 #if CONFIG_UART_DEBUG
+  Serial.setTx(PA2); 
+  Serial.setRx(PA3);
   Serial.begin(115200);
   delay(500);
 #endif
+
+  SEESAW_DEBUGLN(F("Starting Program"));
 
   pinMode(LED_BUILTIN, OUTPUT);
 

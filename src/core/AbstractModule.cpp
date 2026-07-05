@@ -51,8 +51,8 @@ void AbstractModule::initialize()
     // p = (~p & 0x03); // invert active low address bits
     // i2cAddr += p;    // add to base address
 
-    SEESAW_DEBUG(F("I2C 0x"));
-    SEESAW_DEBUGLN(i2cAddr, HEX);
+    // SEESAW_DEBUG(F("I2C 0x"));
+    // SEESAW_DEBUGLN(i2cAddr, HEX);
 
     // TODO - put GPIO setup code here?? Or delegate to moduel implementation?
 
@@ -225,13 +225,12 @@ void AbstractModule::write32(uint32_t value)
 void AbstractModule::receiveEvent(int howMany)
 {
     SEESAW_DEBUG(F("Received "));
-    SEESAW_DEBUG(howMany);
-    SEESAW_DEBUG(F(" bytes:"));
+    SEESAW_DEBUGLN(howMany);
 
     // return if buffer too small
     if ((uint32_t)howMany > sizeof(i2cBuffer))
     {
-        SEESAW_DEBUG(F("Too many bytes received"));
+        SEESAW_DEBUG(F("2 many b rx"));
         return;
     }
 
@@ -269,7 +268,7 @@ void AbstractModule::receiveEvent(int howMany)
  */
 void AbstractModule::requestEvent()
 {
-    SEESAW_DEBUGLN(F("Requesting data"));
+    SEESAW_DEBUGLN(F("Req"));
 
     switch (i2cBuffer[0])
     {

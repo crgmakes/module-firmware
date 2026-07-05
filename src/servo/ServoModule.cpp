@@ -83,6 +83,7 @@ void ServoModule::handleReceiveEvent()
         if (receiveLength == 2)
         {
             // Writing two bytes is really writing the command and function for an upcoming read
+            SEESAW_DEBUGLN("2b");
             return;
         }
 
@@ -95,7 +96,7 @@ void ServoModule::handleReceiveEvent()
             // Check if channel is out of bounds
             if (channel >= MODULE_CHANNELS)
             {
-                SEESAW_DEBUG(F("channel out of range: "));
+                SEESAW_DEBUG(F("channel err: "));
                 SEESAW_DEBUGLN(channel);
                 return;
             }
@@ -106,14 +107,14 @@ void ServoModule::handleReceiveEvent()
         }
         else
         {
-            SEESAW_DEBUG(F("Unhandled receive function 0x"));
-            SEESAW_DEBUGLN(i2cBuffer[1], HEX);
+            // SEESAW_DEBUG(F("Unhandled receive function 0x"));
+            // SEESAW_DEBUGLN(i2cBuffer[1], HEX);
         }
     }
     else
     {
-        SEESAW_DEBUG(F("Unhandled receive cmd 0x"));
-        SEESAW_DEBUGLN(i2cBuffer[0], HEX);
+        // SEESAW_DEBUG(F("Unhandled receive cmd 0x"));
+        // SEESAW_DEBUGLN(i2cBuffer[0], HEX);
     }
 }
 
@@ -128,16 +129,16 @@ void ServoModule::handleRequestEvent()
         uint8_t func = i2cBuffer[1];
         if (func > SEESAW_SERVO_SPEED)
         {
-            SEESAW_DEBUG(F("Requested cuntions out of range: "));
-            SEESAW_DEBUGLN(i2cBuffer[1]);
+            // SEESAW_DEBUG(F("Requested cuntions out of range: "));
+            // SEESAW_DEBUGLN(i2cBuffer[1]);
             return;
         }
 
         uint8_t channel = i2cBuffer[2];
         if (channel >= MODULE_CHANNELS)
         {
-            SEESAW_DEBUG(F("Requested channel out of range: "));
-            SEESAW_DEBUGLN(channel);
+            // SEESAW_DEBUG(F("Requested channel out of range: "));
+            // SEESAW_DEBUGLN(channel);
             // i2c->write(0xff); // instant reply
             Wire.write(0xff); // instant reply
             return;
@@ -167,7 +168,7 @@ void ServoModule::handleRequestEvent()
     }
     else
     {
-        SEESAW_DEBUG(F("Unhandled request cmd 0x"));
-        SEESAW_DEBUGLN(i2cBuffer[0], HEX);
+        // SEESAW_DEBUG(F("Unhandled request cmd 0x"));
+        // SEESAW_DEBUGLN(i2cBuffer[0], HEX);
     }
 }
