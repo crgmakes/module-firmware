@@ -191,8 +191,8 @@ uint32_t AbstractModule::readBulk(uint32_t validpins = 0)
  */
 void AbstractModule::write16(uint16_t value)
 {
-    Wire.write(value >> 8);
-    Wire.write(value);
+    Wire.write((uint8_t)(value >> 8));
+    Wire.write((uint8_t)(value));
     // i2c->write(value >> 8);
     // i2c->write(value);
 }
@@ -207,10 +207,10 @@ void AbstractModule::write32(uint32_t value)
     // i2c->write(value >> 16);
     // i2c->write(value >> 8);
     // i2c->write(value);
-    Wire.write(value >> 24);
-    Wire.write(value >> 16);
-    Wire.write(value >> 8);
-    Wire.write(value);
+    Wire.write((uint8_t)(value >> 24));
+    Wire.write((uint8_t)(value >> 16));
+    Wire.write((uint8_t)(value >> 8));
+    Wire.write((uint8_t)(value));
 }
 
 /**
@@ -407,14 +407,14 @@ void AbstractModule::handleStatusRequest()
     {
     case SEESAW_STATUS_HW_ID:
         //i2c->write(MODULE_HW_ID); // instant reply
-        Wire.write(MODULE_HW_ID); // instant reply
+        Wire.write((uint8_t)(MODULE_HW_ID)); // instant reply
         break;
     case SEESAW_STATUS_VERSION:
         write32(version); // instant reply
         break;
     case SEESAW_STATUS_COUNT:
         //i2c->write(MODULE_CHANNELS); // instant reply
-        Wire.write(MODULE_CHANNELS); // instant reply
+        Wire.write((uint8_t)(MODULE_CHANNELS)); // instant reply
         break;
     }
 }

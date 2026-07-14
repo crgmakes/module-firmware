@@ -96,7 +96,7 @@ void ServoModule::handleReceiveEvent()
             // Check if channel is out of bounds
             if (channel >= MODULE_CHANNELS)
             {
-                SEESAW_DEBUG(F("channel err: "));
+                SEESAW_DEBUG(F("ch err: "));
                 SEESAW_DEBUGLN(channel);
                 return;
             }

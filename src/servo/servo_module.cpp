@@ -7,7 +7,7 @@
 #include "servo/ServoModule.h"
 
 uint8_t value = 0;
-HardwareSerial SerialVCP(PA3, PA2); // RX, TX
+// HardwareSerial SerialVCP(PA3, PA2); // RX, TX
 
 void setup()
 {
@@ -18,7 +18,7 @@ void setup()
   delay(500);
 #endif
 
-  SEESAW_DEBUGLN(F("Starting Program"));
+  SEESAW_DEBUGLN(F("Start"));
 
   pinMode(LED_BUILTIN, OUTPUT);
 
