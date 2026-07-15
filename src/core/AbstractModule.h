@@ -23,6 +23,7 @@
 // #define SEESAW_DEBUGLN(...) SerialVCP.println(__VA_ARGS__)
 #define SEESAW_DEBUG(...) Serial.print(__VA_ARGS__)
 #define SEESAW_DEBUGLN(...) Serial.println(__VA_ARGS__)
+
 #elif (CONFIG_UART_DEBUG == 0)
 #define SEESAW_DEBUG(...)
 #define SEESAW_DEBUGLN(...)
@@ -78,7 +79,11 @@ protected:
   uint8_t i2cAddr;
   volatile uint8_t i2cBuffer[32];
   volatile uint8_t receiveLength;
-
+  
+  volatile uint8_t currentCommand = 0;
+  volatile uint8_t currentFunction = 0;
+  volatile uint8_t currentChannel = 0;
+  
   uint16_t dateCode; // bits represent: DDDDDMMMMYYYYYYYY
   uint32_t version;  // PRODUCT_CODE<<16 | DATE_CODE
 
@@ -123,6 +128,8 @@ protected:
   virtual void handleGpioRequest();
   // virtual void handleAdcRequest();
   // virtual void handleEepromRequest();
+
+  void dumpBuffer();
 
 private:
   AbstractModule(const AbstractModule &) = delete;

@@ -32,6 +32,8 @@ AbstractModule::~AbstractModule() {}
 
 void AbstractModule::initialize()
 {
+    SEESAW_DEBUGLN(F("AINIT"));
+
     // Disable interrupts
     // cli();
     noInterrupts();
@@ -224,13 +226,13 @@ void AbstractModule::write32(uint32_t value)
  */
 void AbstractModule::receiveEvent(int howMany)
 {
-    SEESAW_DEBUG(F("Received "));
+    SEESAW_DEBUG(F("ARCV "));
     SEESAW_DEBUGLN(howMany);
 
     // return if buffer too small
     if ((uint32_t)howMany > sizeof(i2cBuffer))
     {
-        SEESAW_DEBUG(F("2 many b rx"));
+        // SEESAW_DEBUG(F("rx over"));
         return;
     }
 
@@ -245,6 +247,8 @@ void AbstractModule::receiveEvent(int howMany)
         i2cBuffer[i] = Wire.read();
     }
 
+    dumpBuffer();
+    
     switch (i2cBuffer[0])
     {
     case SEESAW_STATUS_BASE:
@@ -268,7 +272,7 @@ void AbstractModule::receiveEvent(int howMany)
  */
 void AbstractModule::requestEvent()
 {
-    SEESAW_DEBUGLN(F("Req"));
+    SEESAW_DEBUGLN(F("ARQE"));
 
     switch (i2cBuffer[0])
     {
@@ -289,11 +293,14 @@ void AbstractModule::requestEvent()
  */
 void AbstractModule::handleStatusReceive()
 {
+    SEESAW_DEBUGLN(F("ASRCV"));
+
     // The only command we handle is writing a reset command
     // Writing to reset register forces a restart
     if (i2cBuffer[1] == SEESAW_STATUS_SWRST)
     {
         initialize();
+        begin();
     }
 }
 
@@ -302,6 +309,8 @@ void AbstractModule::handleStatusReceive()
  */
 void AbstractModule::handleGpioReceive()
 {
+    SEESAW_DEBUGLN(F("AGRCV"));
+
     // All GPIO commands must have a 4 byte payload indicating
     // the pins or GPIO that should be affected.
     // Build single 32-bit variable representing the pins
@@ -403,6 +412,7 @@ void AbstractModule::handleGpioReceive()
 
 void AbstractModule::handleStatusRequest()
 {
+    SEESAW_DEBUGLN(F("SRQ"));
     switch (i2cBuffer[1])
     {
     case SEESAW_STATUS_HW_ID:
@@ -421,8 +431,28 @@ void AbstractModule::handleStatusRequest()
 
 void AbstractModule::handleGpioRequest()
 {
+    SEESAW_DEBUGLN(F("AGRQ"));
     if (i2cBuffer[1] == SEESAW_GPIO_BULK)
     {
         write32(bufferedBulkGPIORead); // instant reply because we did the write before
     }
+}
+
+void AbstractModule::dumpBuffer()
+{
+#if (CONFIG_UART_DEBUG == 1)
+    SEESAW_DEBUG(F("i "));
+    for (uint8_t i = 0; i < receiveLength; i++)
+    {
+        if( i != (receiveLength-1))
+        {
+            SEESAW_DEBUG(i2cBuffer[i]);
+            SEESAW_DEBUG(F(" "));
+        }
+        else
+        {
+            SEESAW_DEBUGLN(i2cBuffer[i]);
+        }
+    }
+#endif
 }

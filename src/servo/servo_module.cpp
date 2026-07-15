@@ -18,7 +18,7 @@ void setup()
   delay(500);
 #endif
 
-  SEESAW_DEBUGLN(F("Start"));
+  SEESAW_DEBUGLN(F("ST"));
 
   pinMode(LED_BUILTIN, OUTPUT);
 
