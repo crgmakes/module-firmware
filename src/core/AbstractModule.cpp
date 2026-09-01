@@ -75,6 +75,11 @@ void AbstractModule::initialize()
     // i2c->begin(i2cAddr);
 
     // // Start I2C bus
+    // Wire.begin(i2cAddr, MODULE_I2C_SDA, MODULE_I2C_SCL, 100000UL);
+
+    Wire.setSCL(MODULE_I2C_SCL);
+    Wire.setSDA(MODULE_I2C_SDA);
+    Wire.setClock(100000UL);
     Wire.begin(i2cAddr);
 
     // Re-enable interrupts
