@@ -72,6 +72,8 @@ public:
   virtual void initialize();
   virtual void begin();
 
+  void setChannelLed(uint8_t channel, bool b);
+
   uint32_t readBulk(uint32_t validpins);
 
 protected:
@@ -95,7 +97,6 @@ protected:
   const uint8_t ledPins[MODULE_CHANNELS] = LED_PINS;
 
   uint32_t readChannel(uint8_t channel);
-  void setChannelLed(uint8_t channel, bool b);
   #endif
 
   void fail();

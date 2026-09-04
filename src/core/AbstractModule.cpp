@@ -68,6 +68,12 @@ void AbstractModule::initialize()
     //     }
     // }
 
+    for (uint8_t i = 0; i < MODULE_CHANNELS; i++)
+    {
+        pinMode(ledPins[i], OUTPUT);
+        setChannelLed(i, false);
+    }
+
     setDateCode();
 
     // Create new I2C Client
@@ -85,6 +91,18 @@ void AbstractModule::initialize()
     // Re-enable interrupts
     // sei();
     interrupts();
+
+    for (uint8_t i = 0; i < MODULE_CHANNELS; i++)
+    {
+        setChannelLed(i, true);
+        delay(100);
+    }
+    delay(250);
+    for (uint8_t i = MODULE_CHANNELS; i != 0; i--)
+    {
+        setChannelLed(i-1, false);
+        delay(100);
+    }
 }
 
 void AbstractModule::begin()

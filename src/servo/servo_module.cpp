@@ -15,7 +15,7 @@ void setup()
   Serial.setTx(MODULE_TX_PIN);
   Serial.setRx(MODULE_RX_PIN);
   Serial.begin(115200);
-  delay(500);
+  // delay(500);
 #endif
 
   SEESAW_DEBUGLN(F("ST"));
@@ -46,6 +46,16 @@ void loop()
   digitalWrite(LED_BUILTIN, LOW); // change state of the LED by setting the pin to the LOW voltage level
   delay(250);                   // wait for a second
 #endif
+
+#if MODULE_VERSION == 10
+  module->setChannelLed(3, true);
+  // digitalWrite(LED_1_PIN, HIGH); // change state of the LED by setting the pin to the HIGH voltage level
+  delay(250);                    // wait for a second
+  module->setChannelLed(3, false);
+  // digitalWrite(LED_1_PIN, LOW); // change state of the LED by setting the pin to the LOW voltage level
+  delay(250);                   // wait for a second
+#endif
+
 
 #if MODULE_VERSION == 11
   digitalWrite(LED_STATUS_PIN, HIGH); // change state of the LED by setting the pin to the HIGH voltage level

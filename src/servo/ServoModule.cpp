@@ -22,7 +22,6 @@ void ServoModule::initialize()
 
     for (uint8_t i = 0; i < MODULE_CHANNELS; i++)
     {
-        pinMode(ioPins[i], OUTPUT);
         servos[i].attach(ioPins[i]);
         set(i, 0); // this needs to be pulled from EEPROM
     }
