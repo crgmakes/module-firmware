@@ -20,21 +20,28 @@ void ServoModule::initialize()
     // Call super initialize
     AbstractModule::initialize();
 
-    pinMode(SERVO_1_PIN, OUTPUT);
-    pinMode(SERVO_2_PIN, OUTPUT);
-    pinMode(SERVO_3_PIN, OUTPUT);
-    pinMode(SERVO_4_PIN, OUTPUT);
+    for (uint8_t i = 0; i < MODULE_CHANNELS; i++)
+    {
+        pinMode(ioPins[i], OUTPUT);
+        servos[i].attach(ioPins[i]);
+        set(i, 0); // this needs to be pulled from EEPROM
+    }
 
-    // Setup hardware
-    servos[0].attach(SERVO_1_PIN);
-    servos[1].attach(SERVO_2_PIN);
-    servos[2].attach(SERVO_3_PIN);
-    servos[3].attach(SERVO_4_PIN);
+    // pinMode(IO_1_PIN, OUTPUT);
+    // pinMode(IO_2_PIN, OUTPUT);
+    // pinMode(IO_3_PIN, OUTPUT);
+    // pinMode(IO_4_PIN, OUTPUT);
 
-    servos[0].write(0); // this needs to be pulled from EEPROM
-    servos[1].write(0); // this needs to be pulled from EEPROM
-    servos[2].write(0); // this needs to be pulled from EEPROM
-    servos[3].write(0); // this needs to be pulled from EEPROM
+    // // Setup hardware
+    // servos[0].attach(IO_1_PIN);
+    // servos[1].attach(IO_2_PIN);
+    // servos[2].attach(IO_3_PIN);
+    // servos[3].attach(IO_4_PIN);
+
+    // servos[0].write(0); // this needs to be pulled from EEPROM
+    // servos[1].write(0); // this needs to be pulled from EEPROM
+    // servos[2].write(0); // this needs to be pulled from EEPROM
+    // servos[3].write(0); // this needs to be pulled from EEPROM
 
     // Servo* s= new Servo();
     // s->attach(PA6);
@@ -50,25 +57,38 @@ void ServoModule::initialize()
     // s->write(0);
 }
 
-void ServoModule::set(uint8_t servo, uint8_t value)
+void ServoModule::set(uint8_t channel, uint8_t value)
 {
-    switch (servo)
+    if (channel < MODULE_CHANNELS)
     {
-    case 0:
-        servos[0].write(value);
-        break;
-    case 1:
-        servos[1].write(value);
-        break;
-    case 2:
-        servos[2].write(value);
-        break;
-    case 3:
-        servos[3].write(value);
-        break;
-    default:
-        break;
+        servos[channel].write(value);
+        values[currentChannel] = value;
+        if (value == 0)
+        {
+            setChannelLed(channel, false);
+        }
+        else
+        {
+            setChannelLed(channel, true);
+        }
     }
+    // switch (channel)
+    // {
+    // case 0:
+    //     servos[0].write(value);
+    //     break;
+    // case 1:
+    //     servos[1].write(value);
+    //     break;
+    // case 2:
+    //     servos[2].write(value);
+    //     break;
+    // case 3:
+    //     servos[3].write(value);
+    //     break;
+    // default:
+    //     break;
+    // }
     // servos[servo].write(value);
 }
 
@@ -94,8 +114,9 @@ void ServoModule::handleReceiveEvent()
                 if (currentChannel < MODULE_CHANNELS)
                 {
                     uint8_t angle = i2cBuffer[3];
-                    servos[currentChannel].write(angle);
-                    values[currentChannel] = angle;
+                    set(currentChannel, angle);
+                    // servos[currentChannel].write(angle);
+                    // values[currentChannel] = angle;
 
                     SEESAW_DEBUG(F("WANG "));
                     SEESAW_DEBUGLN(angle);

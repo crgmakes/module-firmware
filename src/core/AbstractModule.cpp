@@ -109,18 +109,46 @@ void AbstractModule::begin()
     //                });
 }
 
+#if MODULE_VERSION > 0
+
+/**
+ * @brief performs analog read of the specified channel
+ * @param channel the channel
+ * @return the channel value or 0
+ */
+uint32_t AbstractModule::readChannel(uint8_t channel)
+{
+    uint32_t v = 0;
+    if (channel < MODULE_CHANNELS)
+    {
+        v = analogRead(ioPins[channel]);
+    }
+    return v;
+}
+
+/**
+ * @brief sets or resets channel LED
+ * @param channel the channel
+ * @param b true = on, false = off
+ */
+void AbstractModule::setChannelLed(uint8_t channel, bool b)
+{
+    uint8_t v = (b) ? 0 : 1; // low = on, high = off
+    if (channel < MODULE_CHANNELS)
+    {
+        digitalWrite(ledPins[channel], v);
+    }
+}
+
+#endif
+
 void AbstractModule::fail()
 {
     while (1)
     {
-        // Adafruit_seesawPeripheral_run();
         digitalWrite(LED_BUILTIN, HIGH); // change state of the LED by setting the pin to the HIGH voltage level
-        // ((ServoModule*)module)->set(0, 180);
-        // ((ServoModule*)module)->set(3, 1);
         delay(100);                     // wait for a second
         digitalWrite(LED_BUILTIN, LOW); // change state of the LED by setting the pin to the LOW voltage level
-        // ((ServoModule*)module)->set(0, 0);
-        // ((ServoModule*)module)->set(3, 0);
         delay(100); // wait for a second
     }
 }
@@ -253,7 +281,7 @@ void AbstractModule::receiveEvent(int howMany)
     }
 
     dumpBuffer();
-    
+
     switch (i2cBuffer[0])
     {
     case SEESAW_STATUS_BASE:
@@ -421,14 +449,14 @@ void AbstractModule::handleStatusRequest()
     switch (i2cBuffer[1])
     {
     case SEESAW_STATUS_HW_ID:
-        //i2c->write(MODULE_HW_ID); // instant reply
+        // i2c->write(MODULE_HW_ID); // instant reply
         Wire.write((uint8_t)(MODULE_HW_ID)); // instant reply
         break;
     case SEESAW_STATUS_VERSION:
         write32(version); // instant reply
         break;
     case SEESAW_STATUS_COUNT:
-        //i2c->write(MODULE_CHANNELS); // instant reply
+        // i2c->write(MODULE_CHANNELS); // instant reply
         Wire.write((uint8_t)(MODULE_CHANNELS)); // instant reply
         break;
     }
@@ -449,7 +477,7 @@ void AbstractModule::dumpBuffer()
     SEESAW_DEBUG(F("i "));
     for (uint8_t i = 0; i < receiveLength; i++)
     {
-        if( i != (receiveLength-1))
+        if (i != (receiveLength - 1))
         {
             SEESAW_DEBUG(i2cBuffer[i]);
             SEESAW_DEBUG(F(" "));

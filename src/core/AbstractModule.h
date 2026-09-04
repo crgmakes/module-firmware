@@ -88,9 +88,15 @@ protected:
   uint32_t version;  // PRODUCT_CODE<<16 | DATE_CODE
 
   volatile uint32_t bufferedBulkGPIORead;
-  // volatile uint16_t g_bufferedADCRead;
-  // volatile uint8_t g_adcStatus;
-  // volatile uint8_t g_pwmStatus;
+
+  #if MODULE_VERSION > 0
+
+  const uint8_t ioPins[MODULE_CHANNELS] = IO_PINS;
+  const uint8_t ledPins[MODULE_CHANNELS] = LED_PINS;
+
+  uint32_t readChannel(uint8_t channel);
+  void setChannelLed(uint8_t channel, bool b);
+  #endif
 
   void fail();
 

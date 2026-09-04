@@ -18,7 +18,7 @@ public:
     ServoModule();
     virtual ~ServoModule();
     virtual void initialize() override;
-    void set(uint8_t servo, uint8_t value);
+    void set(uint8_t channel, uint8_t value);
     
 
 protected:

@@ -1,13 +1,10 @@
 /**
- * @brief Main program file for an Aquarius Servo Module
- * @file servo_module.h
- * @date July 5, 2025
+ * @brief Main program file for an Aquarius Current Module
+ * @file current_module.cpp
+ * @date Sep 3, 2026
  * @author cyberreefguru
  */
-#include "servo/ServoModule.h"
-
-// uint8_t value = 0;
-// HardwareSerial SerialVCP(PA3, PA2); // RX, TX
+#include "current/CurrentModule.h"
 
 void setup()
 {
@@ -21,22 +18,15 @@ void setup()
   SEESAW_DEBUGLN(F("ST"));
 
 #if MODULE_VERSION == 0
-  pinMode(LED_BUILTIN, OUTPUT);
+    pinMode(LED_BUILTIN, OUTPUT);
 #endif
 
-#if MODULE_VERSION == 11
-    pinMode(LED_STATUS_PIN, OUTPUT);
-#endif
-
-  module = new ServoModule();
-
+  module = new CurrentModule();
   module->initialize();
   module->begin();
 
-  ((ServoModule *)module)->set(0, 180);
-  delay(1000);
-  ((ServoModule *)module)->set(0, 0);
 }
+
 
 void loop()
 {
