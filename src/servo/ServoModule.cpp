@@ -20,21 +20,28 @@ void ServoModule::initialize()
     // Call super initialize
     AbstractModule::initialize();
 
-    pinMode(IO_1_PIN, OUTPUT);
-    pinMode(IO_2_PIN, OUTPUT);
-    pinMode(IO_3_PIN, OUTPUT);
-    pinMode(IO_4_PIN, OUTPUT);
+    for (uint8_t i = 0; i < MODULE_CHANNELS; i++)
+    {
+        servos[i].attach(ioPins[i]);
+        set(i, 0); // this needs to be pulled from EEPROM
+    }
 
-    // Setup hardware
-    servos[0].attach(IO_1_PIN);
-    servos[1].attach(IO_2_PIN);
-    servos[2].attach(IO_3_PIN);
-    servos[3].attach(IO_4_PIN);
 
-    servos[0].write(0); // this needs to be pulled from EEPROM
-    servos[1].write(0); // this needs to be pulled from EEPROM
-    servos[2].write(0); // this needs to be pulled from EEPROM
-    servos[3].write(0); // this needs to be pulled from EEPROM
+    // pinMode(IO_1_PIN, OUTPUT);
+    // pinMode(IO_2_PIN, OUTPUT);
+    // pinMode(IO_3_PIN, OUTPUT);
+    // pinMode(IO_4_PIN, OUTPUT);
+
+    // // Setup hardware
+    // servos[0].attach(IO_1_PIN);
+    // servos[1].attach(IO_2_PIN);
+    // servos[2].attach(IO_3_PIN);
+    // servos[3].attach(IO_4_PIN);
+
+    // servos[0].write(0); // this needs to be pulled from EEPROM
+    // servos[1].write(0); // this needs to be pulled from EEPROM
+    // servos[2].write(0); // this needs to be pulled from EEPROM
+    // servos[3].write(0); // this needs to be pulled from EEPROM
 
     // Servo* s= new Servo();
     // s->attach(PA6);
