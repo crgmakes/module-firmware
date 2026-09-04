@@ -20,16 +20,16 @@ void ServoModule::initialize()
     // Call super initialize
     AbstractModule::initialize();
 
-    pinMode(SERVO_1_PIN, OUTPUT);
-    pinMode(SERVO_2_PIN, OUTPUT);
-    pinMode(SERVO_3_PIN, OUTPUT);
-    pinMode(SERVO_4_PIN, OUTPUT);
+    pinMode(IO_1_PIN, OUTPUT);
+    pinMode(IO_2_PIN, OUTPUT);
+    pinMode(IO_3_PIN, OUTPUT);
+    pinMode(IO_4_PIN, OUTPUT);
 
     // Setup hardware
-    servos[0].attach(SERVO_1_PIN);
-    servos[1].attach(SERVO_2_PIN);
-    servos[2].attach(SERVO_3_PIN);
-    servos[3].attach(SERVO_4_PIN);
+    servos[0].attach(IO_1_PIN);
+    servos[1].attach(IO_2_PIN);
+    servos[2].attach(IO_3_PIN);
+    servos[3].attach(IO_4_PIN);
 
     servos[0].write(0); // this needs to be pulled from EEPROM
     servos[1].write(0); // this needs to be pulled from EEPROM

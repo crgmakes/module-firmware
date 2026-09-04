@@ -68,6 +68,12 @@ void AbstractModule::initialize()
     //     }
     // }
 
+    for (uint8_t i = 0; i < MODULE_CHANNELS; i++)
+    {
+        pinMode(ledPins[i], OUTPUT);
+        setChannelLed(i, false);
+    }
+
     setDateCode();
 
     // Create new I2C Client
@@ -108,6 +114,39 @@ void AbstractModule::begin()
     //                    module->requestEvent(); // request events
     //                });
 }
+
+#if MODULE_VERSION > 0
+
+/**
+ * @brief performs analog read of the specified channel
+ * @param channel the channel
+ * @return the channel value or 0
+ */
+uint32_t AbstractModule::readChannel(uint8_t channel)
+{
+    uint32_t v = 0;
+    if (channel < MODULE_CHANNELS)
+    {
+        v = analogRead(ioPins[channel]);
+    }
+    return v;
+}
+
+/**
+ * @brief sets or resets channel LED
+ * @param channel the channel
+ * @param b true = on, false = off
+ */
+void AbstractModule::setChannelLed(uint8_t channel, bool b)
+{
+    uint8_t v = (b) ? 0 : 1; // low = on, high = off
+    if (channel < MODULE_CHANNELS)
+    {
+        digitalWrite(ledPins[channel], v);
+    }
+}
+
+#endif
 
 void AbstractModule::fail()
 {

@@ -23,10 +23,10 @@ void setup()
   SEESAW_DEBUGLN(F("ST"));
 
   //pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(LED_1_PIN, OUTPUT);
-  pinMode(LED_2_PIN, OUTPUT);
-  pinMode(LED_3_PIN, OUTPUT);
-  pinMode(LED_4_PIN, OUTPUT);
+  // pinMode(LED_1_PIN, OUTPUT);
+  // pinMode(LED_2_PIN, OUTPUT);
+  // pinMode(LED_3_PIN, OUTPUT);
+  // pinMode(LED_4_PIN, OUTPUT);
 
   module = new ServoModule();
 
