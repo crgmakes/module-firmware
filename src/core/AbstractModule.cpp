@@ -92,17 +92,17 @@ void AbstractModule::initialize()
     // sei();
     interrupts();
 
-    for (uint8_t i = 0; i < MODULE_CHANNELS; i++)
-    {
-        setChannelLed(i, true);
-        delay(100);
-    }
-    delay(250);
-    for (uint8_t i = MODULE_CHANNELS; i != 0; i--)
-    {
-        setChannelLed(i-1, false);
-        delay(100);
-    }
+    // for (uint8_t i = 0; i < MODULE_CHANNELS; i++)
+    // {
+    //     setChannelLed(i, true);
+    //     delay(100);
+    // }
+    // delay(250);
+    // for (uint8_t i = MODULE_CHANNELS; i != 0; i--)
+    // {
+    //     setChannelLed(i-1, false);
+    //     delay(100);
+    // }
 }
 
 void AbstractModule::begin()
