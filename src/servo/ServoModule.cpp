@@ -61,7 +61,7 @@ void ServoModule::set(uint8_t channel, uint8_t value)
     if (channel < MODULE_CHANNELS)
     {
         servos[channel].write(value);
-        values[currentChannel] = value;
+        values[channel] = value;
         if (value == 0)
         {
             setChannelLed(channel, false);
