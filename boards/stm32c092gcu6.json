@@ -23,7 +23,7 @@
       "stlink"
     ],
     "jlink_device": "STM32C092GCU6",
-    "openocd_board": "st_nucleo_c0",
+    "openocd_board": "stm32c092gcu6",
     "svd_path": "STM32C0_svd/STM32C092.svd"
   },
   "frameworks": [
