@@ -8,10 +8,7 @@
 #pragma once
 
 #include <Arduino.h>
-#include <Servo.h>
-
 #include <core/AbstractModule.h>
-// #include <Servo_megaTinyCore.h>
 
 class CurrentModule : public AbstractModule
 {

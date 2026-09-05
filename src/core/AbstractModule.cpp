@@ -34,8 +34,12 @@ void AbstractModule::initialize()
 {
     SEESAW_DEBUGLN(F("AINIT"));
 
+    if (LED_STATUS_PIN >= 0)
+    {
+        pinMode(LED_STATUS_PIN, OUTPUT);
+    }
+
     // Disable interrupts
-    // cli();
     noInterrupts();
 
     // Blindly end wire bus
@@ -76,20 +80,13 @@ void AbstractModule::initialize()
 
     setDateCode();
 
-    // Create new I2C Client
-    // i2c = new TwoWire(MODULE_I2C_SDA, MODULE_I2C_SCL);
-    // i2c->begin(i2cAddr);
-
-    // // Start I2C bus
-    // Wire.begin(i2cAddr, MODULE_I2C_SDA, MODULE_I2C_SCL, 100000UL);
-
+    // Start I2C bus
     Wire.setSCL(MODULE_I2C_SCL);
     Wire.setSDA(MODULE_I2C_SDA);
     Wire.setClock(100000UL);
     Wire.begin(i2cAddr);
 
     // Re-enable interrupts
-    // sei();
     interrupts();
 
     for (uint8_t i = 0; i < MODULE_CHANNELS; i++)
@@ -100,7 +97,7 @@ void AbstractModule::initialize()
     delay(250);
     for (uint8_t i = MODULE_CHANNELS; i != 0; i--)
     {
-        setChannelLed(i-1, false);
+        setChannelLed(i - 1, false);
         delay(100);
     }
 }
@@ -116,18 +113,7 @@ void AbstractModule::begin()
                    {
                        module->requestEvent(); // request events
                    });
-    // i2c->onReceive([](int howMany)
-    //                {
-    //                    module->receiveEvent(howMany); // receive events
-    //                });
-
-    // i2c->onRequest([]()
-    //                {
-    //                    module->requestEvent(); // request events
-    //                });
 }
-
-#if MODULE_VERSION > 0
 
 /**
  * @brief performs analog read of the specified channel
@@ -145,29 +131,43 @@ uint32_t AbstractModule::readChannel(uint8_t channel)
 }
 
 /**
+ * @brief sets or resets status LED
+ * @param b true = on, false = off
+ */
+void AbstractModule::setStatusLed(bool b)
+{
+    if (LED_STATUS_PIN >= 0)
+    {
+        uint8_t v = (b) ? 0 : 1; // low = on, high = off
+        digitalWrite(LED_STATUS_PIN, v);
+    }
+}
+
+/**
  * @brief sets or resets channel LED
  * @param channel the channel
  * @param b true = on, false = off
  */
 void AbstractModule::setChannelLed(uint8_t channel, bool b)
 {
-    uint8_t v = (b) ? 0 : 1; // low = on, high = off
     if (channel < MODULE_CHANNELS)
     {
+        uint8_t v = (b) ? 0 : 1; // low = on, high = off
         digitalWrite(ledPins[channel], v);
     }
 }
 
-#endif
-
+/**
+ * @brief critical error fast flash status led
+ */
 void AbstractModule::fail()
 {
     while (1)
     {
-        digitalWrite(LED_BUILTIN, HIGH); // change state of the LED by setting the pin to the HIGH voltage level
-        delay(100);                     // wait for a second
-        digitalWrite(LED_BUILTIN, LOW); // change state of the LED by setting the pin to the LOW voltage level
-        delay(100); // wait for a second
+        setStatusLed(false);
+        delay(100);
+        setStatusLed(true);
+        delay(100);
     }
 }
 
@@ -246,8 +246,6 @@ void AbstractModule::write16(uint16_t value)
 {
     Wire.write((uint8_t)(value >> 8));
     Wire.write((uint8_t)(value));
-    // i2c->write(value >> 8);
-    // i2c->write(value);
 }
 
 /**
@@ -256,10 +254,6 @@ void AbstractModule::write16(uint16_t value)
  */
 void AbstractModule::write32(uint32_t value)
 {
-    // i2c->write(value >> 24);
-    // i2c->write(value >> 16);
-    // i2c->write(value >> 8);
-    // i2c->write(value);
     Wire.write((uint8_t)(value >> 24));
     Wire.write((uint8_t)(value >> 16));
     Wire.write((uint8_t)(value >> 8));
@@ -350,8 +344,8 @@ void AbstractModule::handleStatusReceive()
     // Writing to reset register forces a restart
     if (i2cBuffer[1] == SEESAW_STATUS_SWRST)
     {
-        initialize();
-        begin();
+        // initialize();
+        // begin();
     }
 }
 

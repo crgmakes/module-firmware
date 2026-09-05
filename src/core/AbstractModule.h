@@ -31,34 +31,6 @@
 #error ("CONFIG_UART_DEBUG must be 0 or 1")
 #endif
 
-// #define UART_DEBUG_RXD 6
-// #define UART_DEBUG_TXD 7
-
-// /* ======================= GPIO masks ======================= */
-
-// #define ALL_GPIO 0x01FFFFUL
-// #define ALL_ADC 0b11100001100111111
-
-// // See: https://github.com/adafruit/Adafruit_seesawPeripheral/pull/14
-// //      https://github.com/SpenceKonde/megaTinyCore/blob/master/megaavr/extras/Ref_Timers.md#servo-library
-// // TINYX6_PWM_PINS = (4, 5, 6)
-// // #define ALL_PWM ((1UL << 6) | (1UL << 7) | (1UL << 8))
-
-// #define PWM_WO_OFFSET 4
-// #define ALL_PWM ((1UL << SERVO_1_PIN) | (1UL << SERVO_2_PIN) | (1UL << SERVO_3_PIN))
-
-// #define INVALID_GPIO (((uint32_t)1 << SDA) |               \
-//                       ((uint32_t)1 << SCL) |               \
-//                       ((uint32_t)1 << UART_DEBUG_RXD) |    \
-//                       ((uint32_t)1 << UART_DEBUG_TXD) |    \
-//                       ((uint32_t)1 << PIN_PA0) |           \
-//                       ((uint32_t)1 << MODULE_ADDR_PIN_0) | \
-//                       ((uint32_t)1 << MODULE_ADDR_PIN_1))
-
-// #define VALID_GPIO (ALL_GPIO & ~INVALID_GPIO)
-// #define VALID_ADC (ALL_ADC & VALID_GPIO)
-// #define VALID_PWM (ALL_PWM & VALID_GPIO)
-
 #define MODULE_PRODUCT_CODE (0xAA00 | MODULE_ADDRESS)
 
 /* ======================= Module class ======================= */
@@ -72,32 +44,29 @@ public:
   virtual void initialize();
   virtual void begin();
 
+  void setStatusLed(bool b);
   void setChannelLed(uint8_t channel, bool b);
+
+  uint32_t readChannel(uint8_t channel);
 
   uint32_t readBulk(uint32_t validpins);
 
 protected:
-  // TwoWire *i2c = nullptr;
   uint8_t i2cAddr;
   volatile uint8_t i2cBuffer[32];
   volatile uint8_t receiveLength;
-  
+
   volatile uint8_t currentCommand = 0;
   volatile uint8_t currentFunction = 0;
   volatile uint8_t currentChannel = 0;
-  
+
   uint16_t dateCode; // bits represent: DDDDDMMMMYYYYYYYY
   uint32_t version;  // PRODUCT_CODE<<16 | DATE_CODE
 
   volatile uint32_t bufferedBulkGPIORead;
 
-  #if MODULE_VERSION > 0
-
   const uint8_t ioPins[MODULE_CHANNELS] = IO_PINS;
   const uint8_t ledPins[MODULE_CHANNELS] = LED_PINS;
-
-  uint32_t readChannel(uint8_t channel);
-  #endif
 
   void fail();
 
@@ -119,12 +88,8 @@ protected:
   /**********************/
   /* Receive Handlers   */
   /**********************/
-
   virtual void handleStatusReceive();
   virtual void handleGpioReceive();
-  // virtual void handleAdcReceive();
-  // virtual void handlePwmReceive();
-  // virtual void handleEepromReceive();
 
   /**********************/
   /* Request Handlers   */
@@ -133,8 +98,6 @@ protected:
   // Base Seesaw
   virtual void handleStatusRequest();
   virtual void handleGpioRequest();
-  // virtual void handleAdcRequest();
-  // virtual void handleEepromRequest();
 
   void dumpBuffer();
 
@@ -150,7 +113,7 @@ extern "C"
 #endif
 
   extern AbstractModule *module;
-  extern HardwareSerial SerialVCP;
+  //extern HardwareSerial SerialVCP;
 
 #ifdef __cplusplus
 } // extern "C"

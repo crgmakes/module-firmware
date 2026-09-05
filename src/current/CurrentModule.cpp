@@ -68,7 +68,7 @@ void CurrentModule::handleRequestEvent()
     SEESAW_DEBUGLN(F("SRQST"));
 
     // NOTE: the last receiveEvent filled the current* variables with information about this command
-    if (currentCommand == SEESAW_SERVO_BASE)
+    if (currentCommand == SEESAW_CURRENT_BASE)
     {
         if (currentChannel < MODULE_CHANNELS)
         {

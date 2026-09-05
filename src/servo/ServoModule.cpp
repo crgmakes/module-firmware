@@ -15,6 +15,9 @@ ServoModule::~ServoModule()
 {
 }
 
+/**
+ * @brief initializes servo module
+ */
 void ServoModule::initialize()
 {
     // Call super initialize
@@ -25,37 +28,13 @@ void ServoModule::initialize()
         servos[i].attach(ioPins[i]);
         set(i, 0); // this needs to be pulled from EEPROM
     }
-
-    // pinMode(IO_1_PIN, OUTPUT);
-    // pinMode(IO_2_PIN, OUTPUT);
-    // pinMode(IO_3_PIN, OUTPUT);
-    // pinMode(IO_4_PIN, OUTPUT);
-
-    // // Setup hardware
-    // servos[0].attach(IO_1_PIN);
-    // servos[1].attach(IO_2_PIN);
-    // servos[2].attach(IO_3_PIN);
-    // servos[3].attach(IO_4_PIN);
-
-    // servos[0].write(0); // this needs to be pulled from EEPROM
-    // servos[1].write(0); // this needs to be pulled from EEPROM
-    // servos[2].write(0); // this needs to be pulled from EEPROM
-    // servos[3].write(0); // this needs to be pulled from EEPROM
-
-    // Servo* s= new Servo();
-    // s->attach(PA6);
-    // s->write(0);
-
-    // delay(2000);
-    // for(uint8_t i=0;i<181; i+=10)
-    // {
-    //     s->write(i);
-    //     delay(100);
-    // }
-    // delay(2000);
-    // s->write(0);
 }
 
+/**
+ * @brief sets servo channel to specified value
+ * @param channel the channel
+ * @param value the value (0-180 degrees)
+ */
 void ServoModule::set(uint8_t channel, uint8_t value)
 {
     if (channel < MODULE_CHANNELS)
@@ -71,24 +50,6 @@ void ServoModule::set(uint8_t channel, uint8_t value)
             setChannelLed(channel, true);
         }
     }
-    // switch (channel)
-    // {
-    // case 0:
-    //     servos[0].write(value);
-    //     break;
-    // case 1:
-    //     servos[1].write(value);
-    //     break;
-    // case 2:
-    //     servos[2].write(value);
-    //     break;
-    // case 3:
-    //     servos[3].write(value);
-    //     break;
-    // default:
-    //     break;
-    // }
-    // servos[servo].write(value);
 }
 
 /**

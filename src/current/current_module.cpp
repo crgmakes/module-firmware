@@ -17,10 +17,6 @@ void setup()
 
   SEESAW_DEBUGLN(F("ST"));
 
-#if MODULE_VERSION == 0
-    pinMode(LED_BUILTIN, OUTPUT);
-#endif
-
   module = new CurrentModule();
   module->initialize();
   module->begin();
@@ -30,17 +26,8 @@ void setup()
 
 void loop()
 {
-#if MODULE_VERSION == 0
-  digitalWrite(LED_BUILTIN, HIGH); // change state of the LED by setting the pin to the HIGH voltage level
-  delay(250);                    // wait for a second
-  digitalWrite(LED_BUILTIN, LOW); // change state of the LED by setting the pin to the LOW voltage level
-  delay(250);                   // wait for a second
-#endif
-
-#if MODULE_VERSION == 11
-  digitalWrite(LED_STATUS_PIN, HIGH); // change state of the LED by setting the pin to the HIGH voltage level
-  delay(250);                    // wait for a second
-  digitalWrite(LED_STATUS_PIN, LOW); // change state of the LED by setting the pin to the LOW voltage level
-  delay(250);                   // wait for a second
-#endif
+  module->setStatusLed(true);
+  delay(250);
+  module->setStatusLed(false);
+  delay(250);
 }
