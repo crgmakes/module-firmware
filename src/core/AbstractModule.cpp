@@ -60,19 +60,8 @@ void AbstractModule::initialize()
     // SEESAW_DEBUG(F("I2C 0x"));
     // SEESAW_DEBUGLN(i2cAddr, HEX);
 
-    // TODO - put GPIO setup code here?? Or delegate to moduel implementation?
-
-    // uint32_t pins = VALID_GPIO;
-    // for (uint8_t pin = 0; pin < 32; pin++)
-    // {
-    //     if ((pins >> pin) & 0x1)
-    //     {
-    //         pinMode(pin, INPUT_PULLUP);
-    //         digitalWrite(pin, 0);
-    //     }
-    // }
-
-    for (uint8_t i = 0; i < MODULE_CHANNELS; i++)
+    // Set up module LEDs
+    for (uint8_t i = 0; i < MODULE_LED_CHANNELS; i++)
     {
         pinMode(ledPins[i], OUTPUT);
         setChannelLed(i, false);
@@ -89,13 +78,14 @@ void AbstractModule::initialize()
     // Re-enable interrupts
     interrupts();
 
-    for (uint8_t i = 0; i < MODULE_CHANNELS; i++)
+    // Flash start up routine
+    for (uint8_t i = 0; i < MODULE_LED_CHANNELS; i++)
     {
         setChannelLed(i, true);
         delay(100);
     }
     delay(250);
-    for (uint8_t i = MODULE_CHANNELS; i != 0; i--)
+    for (uint8_t i = MODULE_LED_CHANNELS; i != 0; i--)
     {
         setChannelLed(i - 1, false);
         delay(100);
@@ -125,7 +115,9 @@ uint32_t AbstractModule::readChannel(uint8_t channel)
     uint32_t v = 0;
     if (channel < MODULE_CHANNELS)
     {
+        setChannelLed( channel, true);
         v = analogRead(ioPins[channel]);
+        setChannelLed( channel, false);
     }
     return v;
 }
@@ -150,7 +142,7 @@ void AbstractModule::setStatusLed(bool b)
  */
 void AbstractModule::setChannelLed(uint8_t channel, bool b)
 {
-    if (channel < MODULE_CHANNELS)
+    if (channel < MODULE_LED_CHANNELS)
     {
         uint8_t v = (b) ? 0 : 1; // low = on, high = off
         digitalWrite(ledPins[channel], v);

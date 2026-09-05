@@ -16,8 +16,8 @@ public:
     CurrentModule();
     virtual ~CurrentModule();
     virtual void initialize() override;
+    void sample();
  
-
 protected:
 
 private:

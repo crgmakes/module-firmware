@@ -192,8 +192,8 @@ enum
  */
 enum
 {
-    SEESAW_SWITCH_BULK = 0x01,
-    SEESAW_SWITCH_CHANNEL = 0x02,
+    SEESAW_SWITCH_CHANNEL = 0x01,
+    SEESAW_SWITCH_BULK = 0x02,
 };
 
 /**
@@ -201,7 +201,8 @@ enum
  */
 enum
 {
-    SEESAW_CURRENT_VALUE = 0x01,
+    SEESAW_CURRENT_CHANNEL = 0x01,
+    SEESAW_CURRENT_BULK = 0x02,
 };
 
 

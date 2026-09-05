@@ -28,6 +28,14 @@ void CurrentModule::initialize()
 #endif
 }
 
+void CurrentModule::sample()
+{
+    for (uint8_t i = 0; i < MODULE_CHANNELS; i++)
+    {
+        values[i] = readChannel(i);
+    }
+}
+
 /**
  * @brief handles any data received from the controller. Usually setting a register to a value.
  */
@@ -39,23 +47,21 @@ void CurrentModule::handleReceiveEvent()
         // Stash command, function, and channel
         currentCommand = i2cBuffer[0];
         currentFunction = i2cBuffer[1];
-        currentChannel = i2cBuffer[2];
 
         // if len=3, this is a write for upcoming read
-        if (receiveLength == 3)
+        if (receiveLength == 2 && currentFunction == SEESAW_CURRENT_BULK)
         {
-            if (i2cBuffer[1] == SEESAW_CURRENT_VALUE)
+            currentChannel = 0;
+            for (uint8_t i = 0; i < MODULE_CHANNELS; i++)
             {
-                // Check if channel is out of bounds
-                if (currentChannel < MODULE_CHANNELS)
-                {
-                    setChannelLed( currentChannel, true);
-                    values[currentChannel] = readChannel(currentChannel);
-                    setChannelLed( currentChannel, false);
-                    
-                    SEESAW_DEBUGLN(values[currentChannel]);
-                }
+                values[i] = readChannel(i);
             }
+        }
+        else if (receiveLength == 3 && currentFunction == SEESAW_CURRENT_CHANNEL)
+        {
+            currentChannel = i2cBuffer[2];
+            values[currentChannel] = readChannel(currentChannel);
+            SEESAW_DEBUGLN(values[currentChannel]);
         }
     }
 }
@@ -72,9 +78,17 @@ void CurrentModule::handleRequestEvent()
     {
         if (currentChannel < MODULE_CHANNELS)
         {
-            if (currentFunction == SEESAW_CURRENT_VALUE)
+            if (currentFunction == SEESAW_CURRENT_CHANNEL)
             {
                 write32(values[currentChannel]);
+                return;
+            }
+            else if (currentFunction == SEESAW_CURRENT_BULK)
+            {
+                for (uint8_t i = 0; i < MODULE_CHANNELS; i++)
+                {
+                    write32(values[i]);
+                }
                 return;
             }
         }
