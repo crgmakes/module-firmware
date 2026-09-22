@@ -1,0 +1,14 @@
+{
+  "name": "tool-openocd",
+  "version": "2.1200.251004",
+  "description": "Open On-Chip Debugger (xPack 0.12.0-7)",
+  "keywords": [
+    "debugger",
+    "uploader"
+  ],
+  "homepage": "https://openocd.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xpack-dev-tools/openocd-xpack"
+  }
+}
